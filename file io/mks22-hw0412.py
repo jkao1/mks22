@@ -61,9 +61,54 @@ def Rank(infile,outfile):
 def f(filename):
     f = open(filename,'rU')
     s = f.read().replace('\n','').lower()
-    letters = {}
+    freq = []
+    letter = []
     for c in s:
-        if c not in ',.':
-            letters[c] = s.count(c)
-    return letters
+        if c not in ' ,.':
+            freq.append(s.count(c))
+            letter.append(c)
+    output = ''
+    while len(freq) > 0:
+        output += letter[freq.find(max(freq))]
         
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
