@@ -58,5 +58,12 @@ def Rank(infile,outfile):
     f.close()
 
 #5
-def CharRank(s):
-    for c in s
+def f(filename):
+    f = open(filename,'rU')
+    s = f.read().replace('\n','').lower()
+    letters = {}
+    for c in s:
+        if c not in ',.':
+            letters[c] = s.count(c)
+    return letters
+        
