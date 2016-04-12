@@ -57,4 +57,8 @@ def Rank(infile,outfile):
         i-=1
     f.close()
 
-
+#5
+def CharRank(filename):
+    f = open(filename,'rU')
+    s = f.read()
+    f.close
