@@ -47,9 +47,10 @@ def HighLow(filename):
     print('lowest:',s[0][:-3],'with',s[0][-2:])
 
 #4
+    
 def Rank(infile,outfile):
     s = open(infile,'rU').read().split()
-    s = sorted(s,key=lambda name: name[-2:])
+    s = sorted(s,key=lambda name[2:])
     i = len(s)-1
     f = open(outfile,'w')
     while i >= 0:
@@ -61,17 +62,20 @@ def Rank(infile,outfile):
 def f(filename):
     f = open(filename,'rU')
     s = f.read().replace('\n','').lower()
+    f.close()
     freq = []
     letter = []
     for c in s:
-        if c not in ' ,.':
+        if c not in ' ,.' and c not in letter:
             freq.append(s.count(c))
             letter.append(c)
     output = ''
-    while len(freq) > 0:
-        output += letter[freq.find(max(freq))]
-        
-
+    while len(freq) > 1:
+        c = letter[freq.index(max(freq))]
+        output += c
+        freq.remove(max(freq))
+        letter.remove(c)
+    return output
 
 
 
