@@ -11,3 +11,14 @@ def maxfile(filename):
             print(elem[:-3])
             break
     
+def maxlist(ls):
+    maxx = ls[0]
+    for elem in ls:
+        if elem > maxx:
+            maxx = elem
+    return maxx
+
+def secmaxlist(ls):
+    ls.remove(maxlist(ls))
+    return maxlist(ls)
+    
