@@ -26,4 +26,4 @@ def sec(ls):
             maxx = elem
         elif elem > secmax:
             secmax = elem
-    print(secmax,maxx)
+    print(maxx,secmax)
