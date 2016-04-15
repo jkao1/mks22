@@ -18,4 +18,24 @@ def maxlist(ls):
             maxx = elem
     return maxx
 
+def committee():
+    cmt = []
+    while True:
+        alt = raw_input('Do something (type remove before a member\'s name to remove the member, type done to exit): ')
+        if alt == 'done':
+            break
+        elif len(alt.split()) == 2:
+            cmt.remove(alt.split()[1])
+            print(alt.split()[1] + ' has been removed.')
+        elif alt in cmt:
+            print(alt + ' is already a committee member.')
+        else:
+            cmt.append(alt)
+            print(alt ' has been added to the commitee.') 
+    return alt
+
+
+#look up, enter, remove
+
+
 
