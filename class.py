@@ -18,12 +18,4 @@ def maxlist(ls):
             maxx = elem
     return maxx
 
-def sec(ls):
-    maxx = 0
-    secmax = 0
-    for elem in ls:
-        if elem > maxx:
-            maxx = elem
-        elif elem > secmax:
-            secmax = elem
-    print(maxx,secmax)
+
