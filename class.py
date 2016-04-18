@@ -1,3 +1,11 @@
+"""
+
+notes:
+
+- print(%05d & 3) will print 4 0's before 3 
+
+"""
+
 def maxfile(filename):
     f = open(filename,'rU')
     s = f.read()
