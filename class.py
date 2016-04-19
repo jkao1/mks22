@@ -43,7 +43,6 @@ def committee():
     return alt
 
 
-#look up, enter, remove
 
 
 
