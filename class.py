@@ -2,7 +2,7 @@
 
 notes:
 
-- print(%05d & 3) will print 4 0's before 3 
+- print(%05d % 3) will print 4 0's before 3 
 
 """
 
