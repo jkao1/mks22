@@ -3,6 +3,7 @@
 notes:
 
 - print(%05d % 3) will print 4 0's before 3 
+- if there are quotes around a data, there is something unusual about it (strange symbols, etc.)
 
 """
 
@@ -42,7 +43,16 @@ def committee():
             print(alt ' has been added to the commitee.') 
     return alt
 
-
+def read(filename):
+    f = open(filename,'rU')
+    s = f.read()
+    f.close()
+    if '"' not in s: # quotations usually mean there is something wrong with the data
+        L = s.split()
+    else:
+        L = s.split(',')
+        MD = ','.join(L[1:-1])
+        L[1:-2] = [MD[1:-1]] # removes 0th and max index (the quotations)
 
 
 
