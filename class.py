@@ -40,7 +40,7 @@ def committee():
             print(alt + ' is already a committee member.')
         else:
             cmt.append(alt)
-            print(alt ' has been added to the commitee.') 
+            print(alt + ' has been added to the commitee.') 
     return alt
 
 def read(filename):
@@ -60,5 +60,22 @@ def ReadSAT(filename):
     s = f.read()
     f.close()
     L = s.split('\n')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

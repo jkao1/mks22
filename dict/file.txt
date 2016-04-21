@@ -1,0 +1,4 @@
+ID, Name, Age, GPA
+B3, Peter, 39, 4.87
+A5, George, 12, 3.12
+B78, Henry, 43, 1.59
