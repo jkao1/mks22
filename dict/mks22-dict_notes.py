@@ -27,6 +27,7 @@ def f(opt):
     elif opt == 'first':
         output.sort()
     for hi in output:
-        print(hi)
+        print(hi + '.')
 
-f()
+f('last')
+f('first')
