@@ -1,6 +1,3 @@
-
-row = 0
-
 def f():
     f = open('file.txt', 'rU')
     s = f.read()
