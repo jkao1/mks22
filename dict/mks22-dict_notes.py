@@ -11,7 +11,7 @@ def t():
         output[thing] = row[title.index(thing)]
     return output
     
-def f():
+def f(opt):
     f = open('p8.csv', 'rU')
     s = f.read()
     f.close()
@@ -22,8 +22,11 @@ def f():
     for bro in L:
         if 'MA' == bro[1][:2] or 'MA' == bro[0][:2]:
             output.append(bro[1]+' '+bro[0] + ' has a rating of ' + bro[2])
-    output.sort()
+    if opt == 'last':
+        sorted(output, key=lambda output: output.split(' ')[1])
+    elif opt == 'first':
+        output.sort()
     for hi in output:
-        print(hi + '.')
+        print(hi)
 
 f()
