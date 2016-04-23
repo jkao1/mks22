@@ -122,6 +122,25 @@ NameQuery('namelist.csv')
 print('\n')
 
 #6a (in progress)
+def f(filename):
+    f = open(filename,'rU')
+    s = f.read()
+    f.close()
+    L = s.split('\n')[1:-1]
+    for elem in L:
+        L[L.index(elem)] = elem.split(',')
+    while True:
+        lookfor = input('Report on what name(s)? ')
+        if lookfor == 'break':
+            break
+        output = []
+        for bro in L:
+            if lookfor==bro[0][:len(lookfor)].lower() or lookfor==bro[1][:len(lookfor)].lower():
+                output.append(bro[1]+' '+bro[0] + ' has a rating of ' + 'marker' + bro[2])
+        sorted(output, key=lambda output: output[output.rfind('marker')+1:])
+        print(output)
+f('namelist.csv')
+print('\n')
 
 
 
