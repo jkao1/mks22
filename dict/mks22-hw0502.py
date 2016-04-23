@@ -81,7 +81,25 @@ def MakeMaster(filename):
     f = open(filename,'rU')
     s = f.read()
     f.close()
-     
+    L = s.split('\n')[1:-1]
+    for i in range(len(L)):
+        if '"' in L[i]:
+            quote = L[i].find('"') 
+            target = L[i].find(',',quote)
+            noComma = L[i][:target] + L[i][target+1:]
+            L[i] = noComma.split(',')
+        else:
+            L[i] = L[i].split(',')
+    master = {}
+    for i in range(len(L)):
+        output = {}
+        cg = ['hi','Name','Number','Reading','Math','Writing']
+        for k in range(1,6):
+            output[cg[k]] = L[i][k]
+        master[L[i][0]] = output
+    return master
+
+MakeMaster('sat10-small.csv')
 
 
 
