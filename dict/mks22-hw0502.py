@@ -76,7 +76,7 @@ def School2Dict(line):
         output[cg[i]] = line[i]
     return output
         
-#5 (in progress)
+#5 (solved)
 def MakeMaster(filename):
     f = open(filename,'rU')
     s = f.read()
@@ -101,10 +101,7 @@ def MakeMaster(filename):
 
 MakeMaster('sat10-small.csv')
 
-
-
-
-
+#6 (in progress)
 
 
 
