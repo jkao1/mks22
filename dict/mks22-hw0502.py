@@ -99,12 +99,29 @@ def MakeMaster(filename):
         master[L[i][0]] = output
     return master
 
-MakeMaster('sat10-small.csv')
+print(MakeMaster('sat10-small.csv'))
+print('\n')
 
-#6 (in progress)
+#6 (solved)
+def NameQuery(filename):
+    f = open(filename,'rU')
+    s = f.read()
+    f.close()
+    L = s.split('\n')[1:-1]
+    for elem in L:
+        L[L.index(elem)] = elem.split(',')
+    while True:
+        lookfor = input('Report on what name(s)? ')
+        if lookfor == 'break':
+            break
+        for bro in L:
+            if lookfor==bro[0][:len(lookfor)].lower() or lookfor==bro[1][:len(lookfor)].lower():
+                print(bro[1]+' '+bro[0] + ' has a rating of ' + bro[2])
 
+NameQuery('namelist.csv')
+print('\n')
 
-
+#6a (in progress)
 
 
 
