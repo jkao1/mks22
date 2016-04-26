@@ -137,11 +137,11 @@ def f(filename):
         for bro in L:
             if lookfor==bro[0][:len(lookfor)].lower() or lookfor==bro[1][:len(lookfor)].lower():
                 output.append(bro[1]+' '+bro[0] + ' has a rating of ' + 'marker' + bro[2])
-        sorted(output, key=lambda output: output[output.rfind('marker')+1:])
+        print(sorted(output,key=lambda ls: ls[ls.rfind('marker')+6:]))
         print(output)
+
 f('namelist.csv')
 print('\n')
-
 
 
 
