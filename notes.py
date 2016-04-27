@@ -54,14 +54,6 @@ def read(filename):
         MD = ','.join(L[1:-1])
         L[1:-2] = [MD[1:-1]] # removes 0th and max index (the quotations)
 
-# part of homework for 4/20
-def ReadSAT(filename):
-    f = open(filename, 'rU')
-    s = f.read()
-    f.close()
-    L = s.split('\n')
-
-
 
 
 
