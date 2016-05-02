@@ -4,6 +4,10 @@ notes:
 - print(%05d % 3) will print 4 0's before 3 
 - if there are quotes around a data, there is something unusual about it (strange symbols, etc.)
 
+import os commands:
+- os.getcwd() gives you your path
+- os.chdir() allows you to change your directory
+
 """
 
 def maxfile(filename):
