@@ -121,7 +121,8 @@ def NameQuery(filename):
 NameQuery('namelist.csv')
 print('\n')
 
-#6a (in progress)
+#6a (working out bugs) (deadline reached)
+#only works with rating ordering ):
 def f(filename):
     f = open(filename,'rU')
     s = f.read()
@@ -136,14 +137,11 @@ def f(filename):
         output = []
         for bro in L:
             if lookfor==bro[0][:len(lookfor)].lower() or lookfor==bro[1][:len(lookfor)].lower():
-                output.append(bro[1]+' '+bro[0] + ' has a rating of ' + 'marker' + bro[2])
-        print(sorted(output,key=lambda ls: ls[ls.rfind('marker')+6:]))
-        print(output)
-
+                output.append(bro[1]+' '+bro[0] + ' has a rating of ' + bro[2])
+        sorted(output,key=lambda ls: ls[ls.find('of ')+6:])
+        
 f('namelist.csv')
 print('\n')
-
-
 
     
 
