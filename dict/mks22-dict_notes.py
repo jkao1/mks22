@@ -30,4 +30,5 @@ def f(opt):
         print(hi + '.')
 
 f('last')
+print("\n")
 f('first')
