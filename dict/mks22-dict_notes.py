@@ -1,4 +1,4 @@
-def t():
+def th():
     f = open('file.txt', 'rU')
     s = f.read()
     f.close()
@@ -11,7 +11,7 @@ def t():
         output[thing] = row[title.index(thing)]
     return output
     
-def f(opt):
+def fr(opt):
     f = open('p8.csv', 'rU')
     s = f.read()
     f.close()
