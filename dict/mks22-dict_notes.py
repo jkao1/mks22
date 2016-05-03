@@ -29,6 +29,18 @@ def fr(opt):
     for hi in output:
         print(hi + '.')
 
-f('last')
-print("\n")
-f('first')
+def tu():
+    f = open('p8.csv','rU')
+    s = f.read()
+    L = s.split('\n')[1:]
+    keys = ['lname','fname','rating']
+    M = {}
+    for string in L:
+        items = string.split(',')
+        sd = {}
+        for i in range(3):
+            sd[keys[i]] = items[i]
+        M[items[1]] = sd
+    print(M)
+
+
