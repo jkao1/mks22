@@ -19,10 +19,9 @@ Top_HTML = """
 
 Bottom_HTML = "</body></html>"
 
-def doit():
-    elements = cgi.FieldStorage()
+def ShowInputElements():
     print(HTML_HEADER + Top_HTML)
-    print(elements)
+    print('I like pie</p>')
     print(Bottom_HTML)
 
-doit()
+ShowInputElements()
