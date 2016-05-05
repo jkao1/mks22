@@ -22,9 +22,13 @@ Bottom_HTML = "</body></html>"
 def ShowInputElements():
     form = cgi.FieldStorage()
     print(HTML_HEADER + Top_HTML)
+<<<<<<< HEAD
     print('hi</p>')
     print(form.getvalue('name'))
     print(form.getvalue('num'))
+=======
+    print('nihao</p>')
+>>>>>>> dcb4115aba449b57753994a89654ecbfc8168496
     print(Bottom_HTML)
 
 ShowInputElements()
