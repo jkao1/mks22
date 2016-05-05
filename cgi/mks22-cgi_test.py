@@ -22,7 +22,7 @@ Bottom_HTML = "</body></html>"
 def ShowInputElements():
     form = cgi.FieldStorage()
     print(HTML_HEADER + Top_HTML)
-    if int(form['name']) == 3:
+    if int(form['name'].value) == 3:
         print('Congragulations!')
     else:
         print('Learn math.')
