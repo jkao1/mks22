@@ -1,4 +1,4 @@
-df<html>
+<html>
     
 <head>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans|Montserrat' rel='stylesheet' type='text/css'>
@@ -32,9 +32,6 @@ df<html>
         #input-lname {
             margin-bottom: 20px;
         }
-	option {
-	    color: coral;
-	}
     </style>
 </head>
 
