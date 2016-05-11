@@ -13,18 +13,9 @@ import cgi, cgitb
 cgitb.enable()
 
 HTML_HEADER = 'Content-type:text/html\r\n\r\n' 
-
-Top_HTML = """
-<html><head>
-<title>CGI Test 2</title>
-</head><body>
-<b>Nihao Jason</b>
-"""
+Top_HTML = """<html><head><title>CGI Test 2</title></head><body>"""
 Bottom_HTML = "</body></html>"
 ```
-<a href="http://http://bert.stuy.edu/pbrooks/ml2/Python-Forms-processing.htm">explanation</a>
-<br>
-
 
 ###urllib usage
 ```python
@@ -42,5 +33,5 @@ Bottom_HTML = "</body></html>"
 - value = what shows up by default in textbox, can be the back-end var name if value is on a button
 - buttons need name/values to be differentiated in your program
 
-method GET will show variables inside the url.
-method POST will be sent but without showing the variables.
+method="GET" will show variables inside the url.<br>
+method="POST" will be sent but without showing the variables.
