@@ -25,5 +25,22 @@ Bottom_HTML = "</body></html>"
 <a href="http://http://bert.stuy.edu/pbrooks/ml2/Python-Forms-processing.htm">explanation</a>
 <br>
 
-###Extra:
-- Go to FTP and change file permissions to allow public to execute
+
+###urllib usage
+```python
+>>> import urllib
+>>> f=urllib.urlopen('http://www.micromind.com/stuy'_
+>>> s=f.read()
+```
+
+###Forms Interaction
+```html
+<input type="text" name="fred">
+<input type="submit" name="button" value="ON">
+```
+- name = back-end var
+- value = what shows up by default in textbox, can be the back-end var name if value is on a button
+- buttons need name/values to be differentiated in your program
+
+method GET will show variables inside the url.
+method POST will be sent but without showing the variables.
