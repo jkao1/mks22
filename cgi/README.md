@@ -16,7 +16,10 @@ HTML_HEADER = 'Content-type:text/html\r\n\r\n'
 Top_HTML = """<html><head><title>CGI Test 2</title></head><body>"""
 Bottom_HTML = "</body></html>"
 ```
-
+Btw, to change file permissiosn in the CMD line, type
+```
+chmod +x filename.py
+```
 ###urllib usage
 ```python
 >>> import urllib
