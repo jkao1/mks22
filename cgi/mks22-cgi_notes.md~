@@ -17,4 +17,4 @@
 - buttons need name/values to be differentiated in your program
 
 method GET will show variables inside the url.
-method POST will be sent but without showing the variables.
+method POST will be sent but without showing the variables 
