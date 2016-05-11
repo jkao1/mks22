@@ -14,7 +14,7 @@
 
 <body>
 
-    <form>
+    <form method="GET" action="http://homer.stuy.edu/~pbrooks/allcgi.py">
     <table style="border:1px solid black;">
         
         <tr>
@@ -26,14 +26,39 @@
 	</tr>
 	<tr>
 	    <td>A checkbox (pre-<br>checked)</td>
-	    <td><input type="checkbox" name="vehicle" value="Bike"> Subscribe for $800/year?</td>
+	    <td><input type="checkbox" name="subscribe" value="ON"> Subscribe for $800/year?</td>
 	<tr>
 	    <td>A set of radio buttons:</td>
 	    <td>
-		<input type="radio" name="like_rad"> Ayup
-		<input type="radio" name="like_rad"> Nope
-		<input type="radio" name="like_rad"> Maybe
+		<input type="radio" name="like_rad" value="Ayup"> Ayup
+		<input type="radio" name="like_rad" value="Nope"> Nope
+		<input type="radio" name="like_rad" value="Maybe"> Maybe
 	    </td>
 	<tr>
 	    <td>A drop-down list<br>(allowing multiple<br>selections):</td>
-	   
+		<td>Self-description:
+			<select name="me" size="7" multiple>
+				<option value="Brilliant">Brilliant</option>
+				<option value="Good-looking">Good-looking</option>
+				<option value="Funny">Funny</option>
+				<option value="Sorta_smart">Sorta smart</option>
+				<option value="Tolerable">Tolerable</option>
+				<option value="Great_personality">Great personality</option>
+				<option value="Has_issues">Has issues</option>
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<td>Text area</td>
+		<td>Write a rec:<br><textarea rows="5" name="rec" cols="20"></textarea>
+	</tr>
+	<tr>
+		<td colspan="2">
+			<input type="submit" name="pushit" value="Get on with it.">
+		</td>
+	</tr>
+	
+	</table>
+	</form>
+</body>
+</html>
