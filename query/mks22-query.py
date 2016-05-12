@@ -14,4 +14,4 @@ Top_HTML = """
 Bottom_HTML = "</body></html>"
 
 def Main():
-    
+    form = cgi.FieldStorage()
