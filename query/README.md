@@ -21,6 +21,8 @@ Top_HTML = """
 <b>Nihao Jason</b>
 """
 Bottom_HTML = "</body></html>"
+Stuff = cgi.FieldStorage()
+keyValue = form.getvalue(akey,'')
 ```
 <a href="http://http://bert.stuy.edu/pbrooks/ml2/Python-Forms-processing.htm">explanation</a>
 <br>
