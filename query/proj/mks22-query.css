@@ -35,3 +35,12 @@ input[value="Next"] {
     display: block;
     background-color: #fe5f55
 }   
+.secpage-head {
+    font-size: 60px;
+}
+.secpage-desc {
+    font-size: 24px;
+}
+.subscribe {
+    font-size: 24px;
+}

@@ -7,7 +7,6 @@ cgitb.enable()
 top = "Content-type:text/html\r\n\r\n"
 Top_HTML = """
 <head>
-<title>hi</title>
 </head>
 <body>
 """
@@ -18,7 +17,10 @@ def Main():
     form = cgi.FieldStorage()
     print(top)
     print(Top_HTML)
-    print('Hello, ' + form.getvalue('fname') + ' ' + form.getvalue('lastname'))
+    print("<link href='mks22-query.css' rel='stylesheet'")
+    print('<p class="secpage-head">Hello, ' + form.getvalue('fname') + ' ' + form.getvalue('lname') + '.</p><br>')
+    print('<p class="secpage-desc">' + 'Please proceed to our <a href="http://www.micromind.com">website</a>.</p><br><br><br><br>')
+    print('<p class="subscribe">Subscribe to view future products: <input type="text" placeholder="hi@micromind.com" size="20"')
     print(Bottom_HTML)
 
 Main()
