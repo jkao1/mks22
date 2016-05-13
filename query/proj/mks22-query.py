@@ -19,10 +19,9 @@ def Main():
     form = cgi.FieldStorage()
     print(top)
     print(Top_HTML)
-    print("<link href='mks22-query.css' rel='stylesheet'")
     print('<p class="secpage-head">Hello, ' + form.getvalue('fname') + ' ' + form.getvalue('lname') + '.</p><br>')
     print('<p class="secpage-desc">' + 'Please proceed to our <a href="http://www.micromind.com">website</a>.</p><br><br><br><br>')
-    print('<p class="subscribe">Subscribe to view future products: <input type="text" placeholder="hi@micromind.com" size="20"')
+    print('<p class="subscribe">Subscribe to view future products: <input type="text" style="display:block;margin:0 auto" placeholder="hi@micromind.com" size="20"')
     print('Hello, ' + form.getvalue('fname') + ' ' + form.getvalue('lname'))
     print(Bottom_HTML)
 
