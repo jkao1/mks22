@@ -73,9 +73,19 @@ def ExtremeScores(which_column, how_many, is_top):
 def Main():
     print(content_type)
     print(top)
-    table='<table border="1"><tr><th>School</th><th>Total mean SAT score</th>'
-    if form.getvalue('getFixedInfo','') == 'Submit':
+    table='<table border="1"><tr><th>School</th>'
+    if form.getvalue('getFixedInfo') == 'Submit':
+        table+='<th>Total mean SAT score/th>'
         info=ExtremeScores(6,5,False)
+        for ls in info:
+            table+='<tr><td>'+ls[1]+'</td><td>'+str(ls[0])+'</td></tr>'
+        table+='</table>'
+        print(table)
+    else:
+        col=int(form.getvalue('which_column'))
+        num=int(form.getvalue('how_many'))
+        is_top=form.getvalue('is_top')=='True'
+        info=ExtremeScores(col,num,is_top)
         for ls in info:
             table+='<tr><td>'+ls[1]+'</td><td>'+str(ls[0])+'</td></tr>'
         table+='</table>'
