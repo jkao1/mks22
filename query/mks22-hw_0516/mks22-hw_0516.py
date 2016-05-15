@@ -31,7 +31,7 @@ def ExtremeScores(which_column, how_many, is_top):
     s=f.read()
     f.close()
     output=s.split('\n')[0].split(',')+['Total']
-    output=output[which_column]
+    output=[output[which_column]]
     lines=s.split('\n') 
         
     # now remove first and last lines:
@@ -84,11 +84,12 @@ def Main():
         table+='</table>'
         print(table)
     else:
-        table+='<th>'+info[1]+'</th>'
         col=int(form.getvalue('which_column'))
         num=int(form.getvalue('how_many'))
         is_top=form.getvalue('is_top')=='True'
         info=ExtremeScores(col,num,is_top)
+        table+='<th>'+info[0]+'</th>'
+        
         for ls in info[1:]:
             table+='<tr><td>'+ls[1]+'</td><td>'+str(ls[0])+'</td></tr>'
         table+='</table>'
