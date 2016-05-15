@@ -4,9 +4,9 @@ import cgi, cgitb
 cgitb.enable()
 
 """
-ExtremeScores_helper(), ExtremeScores()
-author: Peter Brooks
-website: micromind.com
+*Disregarding a few changes, the ExtremeScores_helper() function and the
+ExtremeScores() function, which are combined in this file, was written by Peter
+Brooks - micromind.com.
 """
 
 content_type = 'Content-type:text/html\n'
@@ -15,7 +15,7 @@ bottom = '</body></html>'
 
 form = cgi.FieldStorage()
              
-def ExtremeScores_helper(which_column, how_many, is_top):
+def ExtremeScores(which_column, how_many, is_top):
     
     # read the file and split into lines...
     f=open('SAT-2010.csv','rU')
@@ -61,25 +61,16 @@ def ExtremeScores_helper(which_column, how_many, is_top):
     
     return sorted_list[:how_many]
 
-# This is the Step #1 function
-# We assume that the arguments are all reasonable...
-def ExtremeScores(which_column, how_many, is_top):
-    the_list=ExtremeScores_helper(which_column, how_many, is_top)
-
-    # let's get the column headers...
-    s=open('SAT-2010.csv','rU').read()
-    headers=s.split('\n')[0].split(',')+['Total']
-    print(headers[which_column]+' , school')
-    for i in range(how_many):
-        print(str(the_list[i][0])+' , '+the_list[i][1])
-
-
 def Main():
     print(content_type)
     print(top)
+    table='<table border="1">\n'
     if form.getvalue('getFixedInfo','') == 'Submit':
-        print(ExtremeScores(6,5,False))
-        #print('hi')
+        info=ExtremeScores(6,5,False)
+        for ls in info:
+            table+='<tr><td>'+str(ls[0])+'</td><td>'+ls[1]+'</td></tr>\n'
+        table+='</table>'
+        print(table)
     print(bottom)
 
 Main()
