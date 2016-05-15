@@ -30,6 +30,8 @@ def ExtremeScores(which_column, how_many, is_top):
     f=open('SAT-2010.csv','rU')
     s=f.read()
     f.close()
+    output=s.split('\n')[0].split(',')+['Total']
+    output=output[which_column]
     lines=s.split('\n') 
         
     # now remove first and last lines:
@@ -68,7 +70,7 @@ def ExtremeScores(which_column, how_many, is_top):
     else:
         sorted_list=sorted(list_to_sort)
     
-    return sorted_list[:how_many]
+    return output + sorted_list[:how_many]
 
 def Main():
     print(content_type)
@@ -77,16 +79,17 @@ def Main():
     if form.getvalue('getFixedInfo') == 'Submit':
         table+='<th>Total mean SAT score/th>'
         info=ExtremeScores(6,5,False)
-        for ls in info:
+        for ls in info[1:]:
             table+='<tr><td>'+ls[1]+'</td><td>'+str(ls[0])+'</td></tr>'
         table+='</table>'
         print(table)
     else:
+        table+='<th>'+info[1]+'</th>'
         col=int(form.getvalue('which_column'))
         num=int(form.getvalue('how_many'))
         is_top=form.getvalue('is_top')=='True'
         info=ExtremeScores(col,num,is_top)
-        for ls in info:
+        for ls in info[1:]:
             table+='<tr><td>'+ls[1]+'</td><td>'+str(ls[0])+'</td></tr>'
         table+='</table>'
         print(table)
