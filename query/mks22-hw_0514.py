@@ -10,7 +10,16 @@ Brooks - micromind.com.
 """
 
 content_type = 'Content-type:text/html\n'
-top = '<html><head><title>A Fixed Query</title></head><body>'
+top = """
+<html>
+<head>
+<title>A Fixed Query</title>
+<style>
+td {width: 250px}
+table {display:block;margin:0 auto;}
+</style>
+</head>
+<body>"""
 bottom = '</body></html>'
 
 form = cgi.FieldStorage()
@@ -64,11 +73,11 @@ def ExtremeScores(which_column, how_many, is_top):
 def Main():
     print(content_type)
     print(top)
-    table='<table border="1">\n'
+    table='<table border="1"><tr><th>School</th><th>Total mean SAT score</th>'
     if form.getvalue('getFixedInfo','') == 'Submit':
         info=ExtremeScores(6,5,False)
         for ls in info:
-            table+='<tr><td>'+str(ls[0])+'</td><td>'+ls[1]+'</td></tr>\n'
+            table+='<tr><td>'+ls[1]+'</td><td>'+str(ls[0])+'</td></tr>'
         table+='</table>'
         print(table)
     print(bottom)
