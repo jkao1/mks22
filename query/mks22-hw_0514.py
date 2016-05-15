@@ -14,17 +14,7 @@ top = '<html><head><title>A Fixed Query</title></head><body>'
 bottom = '</body></html>'
 
 form = cgi.FieldStorage()
-
-def Main():
-    print(content_type)
-    print(top)
-    if form.getvalue('getFixedInfo','') == 'Submit':
-        print(ExtremeScores(6,5,False))
-        #print('hi')
-    print(bottom)
-
-Main()
-              
+             
 def ExtremeScores_helper(which_column, how_many, is_top):
     
     # read the file and split into lines...
@@ -82,3 +72,15 @@ def ExtremeScores(which_column, how_many, is_top):
     print(headers[which_column]+' , school')
     for i in range(how_many):
         print(str(the_list[i][0])+' , '+the_list[i][1])
+
+
+def Main():
+    print(content_type)
+    print(top)
+    if form.getvalue('getFixedInfo','') == 'Submit':
+        print(ExtremeScores(6,5,False))
+        #print('hi')
+    print(bottom)
+
+Main()
+ 
