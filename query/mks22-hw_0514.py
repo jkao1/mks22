@@ -1,17 +1,17 @@
+#! /usr/bin/python
+
+import cgi, cgitb
+cgitb.enable()
+
 """
 ExtremeScores_helper(), ExtremeScores()
 author: Peter Brooks
 website: micromind.com
 """
 
-# /usr/bin/python
-
-import cgi, cgitb
-cgitb.enable()
-
-content_type = 'Content-type:text/html\r\n\r\n'
-top = '<html><head><title>A Fixed Query</title</head><body'
-bottom = '</body></html'
+content_type = 'Content-type:text/html\n'
+top = '<html><head><title>A Fixed Query</title></head><body>'
+bottom = '</body></html>'
 
 form = cgi.FieldStorage()
 
@@ -20,6 +20,7 @@ def Main():
     print(top)
     if form.getvalue('getFixedInfo','') == 'Submit':
         print(ExtremeScores(6,5,False))
+        #print('hi')
     print(bottom)
 
 Main()
