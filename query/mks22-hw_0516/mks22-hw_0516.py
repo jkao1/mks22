@@ -13,7 +13,7 @@ content_type = 'Content-type:text/html\n'
 top = """
 <html>
 <head>
-<title>A Fixed Query</title>
+<title>Back-end is cool</title>
 <style>
 td {width: 250px}
 table {display:block;margin:0 auto;}
