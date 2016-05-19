@@ -34,17 +34,14 @@ def ExtremeScores(which_column, how_many, is_top):
     output=[output[which_column]]
     lines=s.split('\n') 
         
-    # now remove first and last lines:
     lines = lines[1:-1]
 
-    # split each line into its fields
-    field_lists=[]  # this will be a list of lists
+    hm=[]  
     for line in lines:
         fields=line.split(',')
-        # keep the line only if the last field is not "s"
         if fields[-1] != 's':
             if '"' not in line:  # has ordinary school name? add it
-                field_lists.append(fields)
+                hm.append(fields)
             else:  # school name has double-quotes...
                 # the last 4 fields are always numbers, so
                 school_name_in_parts = fields[1:-4]
@@ -53,11 +50,11 @@ def ExtremeScores(which_column, how_many, is_top):
                 school_name=school_name[1:-1]
                 # put the fields back together
                 new_fields=fields[0:1]+[school_name]+fields[-4:]
-                field_lists.append(new_fields)
+                hm.append(new_fields)
 
     # create a list of just [[score,school_name],[score,school_name],...]
     list_to_sort=[]
-    for f_list in field_lists:
+    for f_list in hm
         if 3<=which_column<=5:
             list_to_sort.append([int(f_list[which_column]),f_list[1]])
         else:  # we want the total SAT score
