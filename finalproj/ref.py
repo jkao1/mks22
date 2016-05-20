@@ -13,6 +13,7 @@ th = ['Calories', 'Fat', 'Carbs', 'Fiber', 'Protein', 'Sodium']
 def get(product_type,item):
     main = html(product_type,item) 
     main = main.split('</tr>')[1:-1]
+    M = {}
     for i in range(len(main)): # loops all <tr>'s of all products in main
         product = main[i]
         product = product.split('</td>')[:-1]
@@ -21,13 +22,17 @@ def get(product_type,item):
             title = cont[cont.find('/',57)+1:cont.find('"',57)]
         else:
             title = cont[cont.find('/',42)+1:cont.find('"',42)]
-        print title 
-        M = {}
+        dic = {}
         ls = []
         for item in product: # loops all <td>'s from the <tr>
             angle = item.rfind('>')
             ls.append(item[angle+1:])
         for i in range(6):
-            M[th[i]] = ls[i]
-        print M
-            
+            dic[th[i]] = ls[i]
+        M[title] = dic
+    query = "Calories"
+    table = "<table>"
+    for key in M:
+        table += '<tr>'+'<td>'+key+'</td>'+'<td>'+M[key][query]+'</td>'+'</tr>'
+    print table           
+    
