@@ -8,8 +8,8 @@
         <form method="GET" action="ref.py">
             Do you want ...
             <select name="product_type">
-                <option value="drink">a drink?</option>
-                <option value="food">some food?</option>
+                <option value="food">a drink?</option>
+                <option value="drink">some food?</option>
 		<option value="#">a little of both?</option>
             </select><br>
 	    Choose an item:

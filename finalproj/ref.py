@@ -1,6 +1,20 @@
-import urllib
+#! /usr/bin/python
 
-def html(product_type,item):
+import urllib
+import cgi, cgitb
+cgitb.enable()
+
+content_type = "Content-type:text/html\n"
+html_top = """<html>
+<head>
+<title>Title</title>
+</head>
+<body>
+"""
+html_btm = "</body></html>"
+
+
+def get(product_type,item):
     url_nutr = 'http://www.starbucks.com/menu/catalog/nutrition?'+product_type+'=' + item + '#view_control=nutrition'
     f = urllib.urlopen(url_nutr)
     s = f.read()
@@ -8,10 +22,10 @@ def html(product_type,item):
     t_end = s.find('</table>',t_start)
     return s[t_start:t_end]
  
-th = ['Calories', 'Fat', 'Carbs', 'Fiber', 'Protein', 'Sodium']
+th = ['calories', 'fat', 'carbs', 'fiber', 'protein', 'sodium']
 
-def get(product_type,item):
-    main = html(product_type,item) 
+def store(product_type,item,info):
+    main = get(product_type,item) 
     main = main.split('</tr>')[1:-1]
     M = {}
     for i in range(len(main)): # loops all <tr>'s of all products in main
@@ -30,9 +44,32 @@ def get(product_type,item):
         for i in range(6):
             dic[th[i]] = ls[i]
         M[title] = dic
-    query = "Calories"
-    table = "<table>"
-    for key in M:
-        table += '<tr>'+'<td>'+key+'</td>'+'<td>'+M[key][query]+'</td>'+'</tr>'
-    print table           
+
+    table = "<table border=1>"
     
+    for key in M:
+        table += '<tr>'+'<td>'+key+'</td>'+'<td>'+M[key][info]+'</td>'+'</tr>'
+    return table        
+
+form = cgi.FieldStorage()
+
+def html1():
+    print 'hi'
+def html2():
+    product_type = form.getvalue('product_type')
+    item = form.getvalue('item')
+    info = form.getvalue('info')
+    print store(product_type, item, info)
+
+def choose():
+    print content_type
+    print html_top
+    if form.getvalue('index') == '':
+        html1()
+    else:
+        html2()
+        
+    
+    print html_btm
+
+choose() 
