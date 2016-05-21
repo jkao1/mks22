@@ -1,10 +1,9 @@
 #final proj
 
 ###Ideas
-Project Proposal:
-Problem: story abt starbucks and searching for nutrition, going back three directories for every item, too tedious
-Solution: python program parses every
 ###To-dos
+###Problems
+- there is no nutrition sheet for Frappuccinos
 
 ###Notes
 ```html
