@@ -4,6 +4,7 @@
 ###To-dos
 ###Problems
 - there is no nutrition sheet for Frappuccinos
+- product_type="food" title always appears with "?foodZone=9999" at the end
 
 ###Notes
 ```html
