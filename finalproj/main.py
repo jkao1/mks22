@@ -1,5 +1,3 @@
-#*CHANGES IN MAIN.PY HAVE A *
-#*
 #! /usr/bin/python
 
 import urllib
@@ -50,7 +48,7 @@ def store(product_type,item,info):
         for i in range(6):
             dic[th[i]] = ls[i]
         M[title] = dic
-
+    
     table = "<table border=1>"
     table += "\n\t<tr><th>Product Name</th><th>"+info.upper()+"</th></tr>"
     for key in M:
@@ -58,21 +56,20 @@ def store(product_type,item,info):
     table += "\n</table>"
     return table        
 
-#*form = cgi.FieldStorage()
+form = cgi.FieldStorage()
 
-def html(product_type, item, info): #* html():
-    #*product_type = form.getvalue('product_type')
-    #*item = form.getvalue('item')
-    #*info = form.getvalue('info')
+def html():
+    product_type = form.getvalue('product_type')
+    item = form.getvalue('item')
+    info = form.getvalue('info')
     table = store(product_type, item, info)
     print table
 
-def Main(product_type, item, info): #* Main():
+def Main():
     print content_type
     print html_top
-    html(product_type, item, info)
-    #*html()
+    print css
+    html()
     print html_btm
 
-#*Main()
-#example:
+Main() 

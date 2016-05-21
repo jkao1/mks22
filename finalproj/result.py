@@ -1,5 +1,3 @@
-#*CHANGES IN MAIN.PY HAVE A *
-#*
 #! /usr/bin/python
 
 import urllib
@@ -19,7 +17,7 @@ table {display:block;margin:0 auto}
 </style></head>
 """
 
-def get(product_type,item):
+def sb_get(product_type,item):
     url_nutr = 'http://www.starbucks.com/menu/catalog/nutrition?'+product_type+'=' + item + '#view_control=nutrition'
     f = urllib.urlopen(url_nutr)
     s = f.read()
@@ -29,8 +27,8 @@ def get(product_type,item):
  
 th = ['calories', 'fat', 'carbs', 'fiber', 'protein', 'sodium']
 
-def store(product_type,item,info):
-    main = get(product_type,item) 
+def sb_store(product_type,item,info):
+    main = sb_get(product_type,item) 
     main = main.split('</tr>')[1:-1]
     M = {}
     for i in range(len(main)): # loops all <tr>'s of all products in main
@@ -50,7 +48,7 @@ def store(product_type,item,info):
         for i in range(6):
             dic[th[i]] = ls[i]
         M[title] = dic
-
+    
     table = "<table border=1>"
     table += "\n\t<tr><th>Product Name</th><th>"+info.upper()+"</th></tr>"
     for key in M:
@@ -58,21 +56,21 @@ def store(product_type,item,info):
     table += "\n</table>"
     return table        
 
-#*form = cgi.FieldStorage()
+form = cgi.FieldStorage()
 
-def html(product_type, item, info): #* html():
-    #*product_type = form.getvalue('product_type')
-    #*item = form.getvalue('item')
-    #*info = form.getvalue('info')
-    table = store(product_type, item, info)
+def sb_html():
+    product_type = form.getvalue('product_type')
+    item = form.getvalue('item')
+    info = form.getvalue('info')
+    table = sb_store(product_type, item, info)
     print table
 
-def Main(product_type, item, info): #* Main():
+def Main():
     print content_type
     print html_top
-    html(product_type, item, info)
-    #*html()
+    print css
+    if form.getvalue('Starbucks') == 'Submit':
+        sb_html()
     print html_btm
 
-#*Main()
-#example:
+Main() 
