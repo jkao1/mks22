@@ -53,23 +53,17 @@ def store(product_type,item,info):
 
 form = cgi.FieldStorage()
 
-def html1():
-    print 'hi'
-def html2():
+def html():
     product_type = form.getvalue('product_type')
     item = form.getvalue('item')
     info = form.getvalue('info')
-    print store(product_type, item, info)
+    table = store(product_type, item, info)
+    print table
 
-def choose():
+def Main():
     print content_type
     print html_top
-    if form.getvalue('index') == '':
-        html1()
-    else:
-        html2()
-        
-    
+    html()
     print html_btm
 
-choose() 
+Main() 
