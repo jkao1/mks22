@@ -50,20 +50,12 @@ def store(product_type,item,info):
             ls.append(float(new))
         for i in range(6):
             dic[th[i]] = ls[i]
-        M[title] = dic
-<<<<<<< HEAD
-        
-    table = "<table border=1>"
-    table += "\n\t<tr><th>Product Name</th><th>"+info.upper()+"</th></tr>"
-    for key in M:
-        table += '\n\t<tr>'+'<td>'+key+'</td>'+'<td>'+M[key][info]+'</td>'+'</tr>'
-=======
-    return M
+        M[title] = dic        
+
     table = "<table border=1>"
     table += "\n\t<tr><th>Product Name</th><th>"+info.upper()+"</th></tr>"
     for key in M:
         table += '\n\t<tr>'+'<td>'+key+'</td>'+'<td>'+str(M[key][info])+'</td>'+'</tr>'
->>>>>>> 4240850cdd301fddbb3560c99871a9a18e481437
     table += "\n</table>"
     return table        
 
@@ -85,3 +77,37 @@ def Main(product_type, item, info): #* Main():
 
 #*Main()
 #example:
+
+def get2():
+    url_frappe = 'http://www.starbucks.com/menu/drinks/frappuccino-blended-beverages/caffe-vanilla-frappuccino-light-blended-beverage'
+    f = urllib.urlopen(url_frappe)
+    s = f.read()
+    t_start = s.rfind('<table ')
+    t_end = s.find('</table>',t_start)
+    return s[t_start:t_end]
+
+def store2():
+    main = get2()
+    main = main.split('</tr>')[1:11] # rest info is useless
+    for elem in main: # gathering info
+        if '<strong>' in elem:
+            i = main.index(elem)
+            elem = elem.replace('\r','').replace('\n','').replace('\t','')
+            main[i] = elem
+            print elem
+        else:
+            main.remove(elem)
+    return main
+    M = {}
+    for i in range(len(main)):
+        elem = main[i]
+        t_end = elem.rfind(' ')
+        title = elem[:t_end]
+        num = elem[t_end+1:]
+        M[title] = num
+ #   M['fat'] = M['Total Fat']
+#    M['carbs'] = M['Total Carbohydrate']
+#    del M['Total Fat']
+#    del M['Total Carbohydrate']
+    return M
+# 0 2 5 6 7 10
