@@ -44,6 +44,15 @@
     </head>
     
     <body>
+
+        <form method="GET" action="1product_type.py">
+            Choose a store...
+            <select name="store">
+                <option value="starbucks">Starbucks</option>
+            </select><br>
+            <input type="submit">
+        </form>
+
         <img src="giphy.gif">
         <div class="header">
             <form method="GET" action="1product_type.py">

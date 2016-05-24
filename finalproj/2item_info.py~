@@ -84,7 +84,7 @@ def Main():
     print css
     if form.getvalue('Starbucks') == "Let's Go!":
         sb_html()
-    elif form.getvalue('Pret A Manger') == "Let's Go!":
+    elif form.getvalue('Pret A Manger') == "Let's Go!";
         pm_html()
     print html_btm
 
