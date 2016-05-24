@@ -46,15 +46,16 @@ def store(product_type,item,info):
         ls = []
         for item in product: # loops all <td>'s from the <tr>
             angle = item.rfind('>')
-            ls.append(item[angle+1:])
+            new = item[angle+1:]
+            ls.append(float(new))
         for i in range(6):
             dic[th[i]] = ls[i]
         M[title] = dic
-
+    return M
     table = "<table border=1>"
     table += "\n\t<tr><th>Product Name</th><th>"+info.upper()+"</th></tr>"
     for key in M:
-        table += '\n\t<tr>'+'<td>'+key+'</td>'+'<td>'+M[key][info]+'</td>'+'</tr>'
+        table += '\n\t<tr>'+'<td>'+key+'</td>'+'<td>'+str(M[key][info])+'</td>'+'</tr>'
     table += "\n</table>"
     return table        
 

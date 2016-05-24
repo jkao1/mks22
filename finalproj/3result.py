@@ -17,7 +17,7 @@ table {display:block;margin:0 auto}
 </style></head>
 """
 
-def get(product_type,item):
+def sb_get(product_type,item):
     url_nutr = 'http://www.starbucks.com/menu/catalog/nutrition?'+product_type+'=' + item + '#view_control=nutrition'
     f = urllib.urlopen(url_nutr)
     s = f.read()
@@ -27,8 +27,8 @@ def get(product_type,item):
  
 th = ['calories', 'fat', 'carbs', 'fiber', 'protein', 'sodium']
 
-def store(product_type,item,info):
-    main = get(product_type,item) 
+def sb_store(product_type,item,info):
+    main = sb_get(product_type,item) 
     main = main.split('</tr>')[1:-1]
     M = {}
     for i in range(len(main)): # loops all <tr>'s of all products in main
@@ -40,6 +40,7 @@ def store(product_type,item,info):
         else:
             title = cont[cont.find('/',42)+1:cont.find('"',42)]
         title = title.replace('-',' ')
+        title = title.replace('?foodZone=9999','')
         dic = {}
         ls = []
         for item in product: # loops all <td>'s from the <tr>
@@ -58,18 +59,19 @@ def store(product_type,item,info):
 
 form = cgi.FieldStorage()
 
-def html():
+def sb_html():
     product_type = form.getvalue('product_type')
     item = form.getvalue('item')
     info = form.getvalue('info')
-    table = store(product_type, item, info)
+    table = sb_store(product_type, item, info)
     print table
 
 def Main():
     print content_type
     print html_top
     print css
-    html()
+    if form.getvalue('Starbucks') == 'Submit':
+        sb_html()
     print html_btm
 
 Main() 
