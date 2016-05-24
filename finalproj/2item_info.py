@@ -72,13 +72,28 @@ def sb_html():
     output += '<input type="hidden" name="product_type" value="'+product_type+'">'
     output += '<input type="submit" name="Starbucks" value="Submit"></form>'
     print output
+<<<<<<< HEAD
+=======
+
+def pm_html(): #incomplete
+    product_type = form.getvalue("product_type") 
+    output = '<form method="GET" action="3result.py">'
+    print "nothing yet"
+>>>>>>> 4240850cdd301fddbb3560c99871a9a18e481437
     
 def Main():
     print content_type
     print html_top
     print css
+<<<<<<< HEAD
     if form.getvalue('Starbucks') == 'Submit':
         sb_html()
+=======
+    if form.getvalue('Starbucks') == "Let's Go!":
+        sb_html()
+    elif form.getvalue('Pret A Manger') == "Let's Go";
+        pm_html()
+>>>>>>> 4240850cdd301fddbb3560c99871a9a18e481437
     print html_btm
 
 Main() 
