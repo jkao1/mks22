@@ -1,10 +1,13 @@
 #final proj
 
 ###Ideas
-Project Proposal:
-Problem: story abt starbucks and searching for nutrition, going back three directories for every item, too tedious
-Solution: python program parses every
 ###To-dos
+- add units of measurement
+- food
+
+###Problems
+- there is no nutrition sheet for Frappuccinos, Sodas 
+- product_type="food" title always appears with "?foodZone=9999" at the end
 
 ###Notes
 ```html
