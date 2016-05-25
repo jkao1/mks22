@@ -1,14 +1,15 @@
 body {
 	margin: 0;
 	overflow: hidden;
+	background: #456990;
 }
-img {
-	width: auto;
-	height: auto;
-	position: absolute;
-	min-height: 100%;
-	min-width: 100%;
+
+.item-info-bg {
+	margin: 0;
+	overflow: hidden;
+	background: #028090;
 }
+
 .header {
 	display: block;
 	margin: 0 auto;
@@ -16,22 +17,50 @@ img {
 	top: 30%;
 	text-align: center;
 }
+
 .header form p {
-	font-family: 'Gill Sans';
+	font-family: 'Open Sans';
 	font-size: 50;
-	color: white;
+	color: #e4fde1;
 }
+
 .header form input[type="submit"] {
 	display: inline-block;
-	background: rgb(7,149,97);
+	background: #f45b69;
+	border: 1px solid #f45b69;
+	border-radius: 10px;
+	color: white;
+	font-size: 24px;
+	font-family: 'Montserrat';
+	padding: 20px;
+	transition-duration: .3s;
+}
+
+.header form input[name="Starbucks"] {
+	display: inline-block;
+	background: #028090;
 	border: 1px solid rgb(7,149,97);
 	border-radius: 10px;
 	color: white;
 	font-size: 24px;
 	font-family: 'Gill Sans';
-	padding: 20px;
+	padding: 12px 20px;
 	transition-duration: .3s;
 }
-.header form input[type="submit"]:hover {
 
+.header form select[name="product_type"] {
+	display: block;
+	width: 100px;
+	height: 30px;
+	background: #e4fde1;
+	border: 1px solid #e4fde1;
+	border-radius: 10px;
 }
+
+
+
+
+
+
+
+
