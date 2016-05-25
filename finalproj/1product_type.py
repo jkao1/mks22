@@ -9,16 +9,14 @@ content_type = "Content-type:text/html\n"
 html_top = """
 <html>
     <head> 
-    <title>Title</title>
+        <title>Title</title>
+        <link href="css/custom.css" rel="stylesheet">
+    </head>
+    <body>
+    <img src="img/giphy.gif">
+    <div class="header">
 """
-css = """
-    <style>
-    table {display:block;margin:0 auto}
-    </style>
-</head>
-<body>
-"""
-html_btm = "</body></html>"
+html_btm = "</div></body></html>"
 
 def sb_html():
     print """
@@ -47,7 +45,6 @@ form = cgi.FieldStorage()
 def Main():
     print content_type
     print html_top
-    print css
     if form.getvalue('store') == 'Starbucks':
         sb_html()
     elif form.getvalue('store') == 'Pret A Manger':
