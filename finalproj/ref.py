@@ -77,7 +77,7 @@ def Main(product_type, item, info): #* Main():
 
 #*Main()
 #example:
-def frappe():
+def sb_frappe_main():
     url = 'http://www.starbucks.com/menu/drinks/frappuccino-blended-beverages'
     f = urllib.urlopen(url)
     s = f.read()
@@ -94,7 +94,7 @@ def frappe():
         t_start = elem.find('frappuccino-blended-beverages')+30
         t_end = elem.find('"',t_start)
         title = elem[t_start:t_end]
-        M[title.replace('-',' ')] = store_frappe(title)
+        M[title.replace('-',' ')] = sb_store_frappe(title)
         e_start = title.find(' blended') # redundant info
         if e_start != -1:          
             title = title[:e_start]
@@ -115,7 +115,7 @@ def sb_get_frappe(item):
     return s[t_start:t_end]
 
 def sb_store_frappe(item):
-    main = get_frappe(item)
+    main = sb_get_frappe(item)
     main = main.split('</tr>')[:11] # rest info is useless
     M = {}
     for i in range(len(main)): # gathering info
