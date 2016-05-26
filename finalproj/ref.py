@@ -57,7 +57,7 @@ def store(product_type,item,info):
     for key in M:
         table += '\n\t<tr>'+'<td>'+key+'</td>'+'<td>'+str(M[key][info])+'</td>'+'</tr>'
     table += "\n</table>"
-    return table        
+    return table
 
 #*form = cgi.FieldStorage()
 
@@ -77,7 +77,7 @@ def Main(product_type, item, info): #* Main():
 
 #*Main()
 #example:
-def loop():
+def frappe():
     url = 'http://www.starbucks.com/menu/drinks/frappuccino-blended-beverages'
     f = urllib.urlopen(url)
     s = f.read()
@@ -88,24 +88,34 @@ def loop():
     ### NEXT FUNCTION ###
     ol = s[ol_start:ol_end]
     ol = ol.split('<li>')[1:]
-    return
+    M = {}
     for i in range(len(ol)):
         elem = ol[i]
         t_start = elem.find('frappuccino-blended-beverages')+30
         t_end = elem.find('"',t_start)
         title = elem[t_start:t_end]
-        print title
+        M[title.replace('-',' ')] = store_frappe(title)
+        e_start = title.find(' blended') # redundant info
+        if e_start != -1:          
+            title = title[:e_start]
+    info = 'calories'
+    table = "<table border=1>"
+    table += "\n\t<tr><th>Product Name</th><th>"+info.upper()+"</th></tr>"
+    for key in M:
+        table += '\n\t<tr>'+'<td>'+key+'</td>'+'<td>'+M[key][info]+'</td>'+'</tr>'
+    table += "\n</table>"
+    return table    
 
-def get2():
-    url_frappe = 'http://www.starbucks.com/menu/drinks/sodas/golden-ginger-ale-fizzio-handcrafted-soda'
+def sb_get_frappe(item):
+    url_frappe = 'http://www.starbucks.com/menu/drinks/frappuccino-blended-beverages/'+item
     f = urllib.urlopen(url_frappe)
     s = f.read()
     t_start = s.rfind('<table ')
     t_end = s.find('</table>',t_start)
     return s[t_start:t_end]
 
-def store2():
-    main = get2()
+def sb_store_frappe(item):
+    main = get_frappe(item)
     main = main.split('</tr>')[:11] # rest info is useless
     M = {}
     for i in range(len(main)): # gathering info
@@ -130,4 +140,4 @@ def store2():
         if title in th: #th is the title list
             M[title] = num
     
-    print M
+    return M

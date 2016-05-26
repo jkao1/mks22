@@ -36,7 +36,7 @@ def sb_html():
             <option value="chocolate">Chocolate Drinks</option>
             <option value="brewed-coffee">Brewed Coffee</option>
             <option value="bottled-drinks">Bottled Drinks</option>
-            <option value="frappuccino" disabled>Frappuccino !coming soon!</option>
+            <option value="frappuccino">Frappuccino !coming soon!</option>
             <option value="sodas" disabled>Sodas !coming soon!</option>
             <option value="smoothies">Smoothies</option>
             <option value="kids-drinks-and-other">Other</option>
