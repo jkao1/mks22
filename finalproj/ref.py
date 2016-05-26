@@ -87,9 +87,14 @@ def loop():
     
     ### NEXT FUNCTION ###
     ol = s[ol_start:ol_end]
-    ol = ol.split('<li>'
-    
-print(loop())
+    ol = ol.split('<li>')[1:]
+    return
+    for i in range(len(ol)):
+        elem = ol[i]
+        t_start = elem.find('frappuccino-blended-beverages')+30
+        t_end = elem.find('"',t_start)
+        title = elem[t_start:t_end]
+        print title
 
 def get2():
     url_frappe = 'http://www.starbucks.com/menu/drinks/sodas/golden-ginger-ale-fizzio-handcrafted-soda'
