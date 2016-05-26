@@ -36,10 +36,10 @@ body {
 	transition-duration: .3s;
 }
 
-.header form input[name="Starbucks"] {
+.header form input[value="Yes"] {
 	display: inline-block;
 	background: #028090;
-	border: 1px solid rgb(7,149,97);
+	border: 1px solid #028090;
 	border-radius: 10px;
 	color: white;
 	font-size: 24px;
@@ -50,17 +50,16 @@ body {
 
 .header form select[name="product_type"] {
 	display: block;
-	width: 100px;
-	height: 30px;
-	background: #e4fde1;
-	border: 1px solid #e4fde1;
-	border-radius: 10px;
+	background-color: #e4fde1;
+	font-family: 'Montserrat';
+	margin: 0 auto;
+	margin-bottom: 40px;
+	border: 0;
+	font-size: 24px;
+	width: 300px;
+	height: 60px;
 }
 
-
-
-
-
-
-
-
+.header form select[name="product_type"]:focus {
+	outline: none;
+}

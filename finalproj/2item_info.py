@@ -82,9 +82,9 @@ def Main():
     print content_type
     print html_top
     print css
-    if form.getvalue('Starbucks') == "Let's Go!":
+    if form.getvalue('Starbucks') == "Yes":
         sb_html()
-    elif form.getvalue('Pret A Manger') == "Let's Go!":
+    elif form.getvalue('Pret A Manger') == "Yes":
         pm_html()
     print html_btm
 

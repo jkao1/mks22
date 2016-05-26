@@ -25,8 +25,8 @@ def sb_html():
         <select name="product_type">
             <option value="drink">a drink?</option>
             <option value="food">some food?</option>
-        </select><br>
-        <input type="submit" name="Starbucks" value="Let's Go!">
+        <br>
+        <input type="submit" name="Starbucks" value="Yes">
     </form>
     """
 
@@ -36,7 +36,7 @@ def pm_html(): #incomplete
         Do you want ...
         <select name="product_type">
         </select><br>
-        <input type="submit" name="Pret A Manger" value="Let's Go!'">
+        <input type="submit" name="Pret A Manger" value="Yes">
     </form>
     """
 

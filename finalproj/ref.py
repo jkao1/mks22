@@ -77,9 +77,22 @@ def Main(product_type, item, info): #* Main():
 
 #*Main()
 #example:
+def loop():
+    url = 'http://www.starbucks.com/menu/drinks/frappuccino-blended-beverages'
+    f = urllib.urlopen(url)
+    s = f.read()
+    ol_start = s.find('<ol', s.find('<h3>Drinks</h3>'))
+    ol_end = s.find('</ol>', ol_start)
+    #return s[ol_start:ol_end]
+    
+    ### NEXT FUNCTION ###
+    ol = s[ol_start:ol_end]
+    ol = ol.split('<li>'
+    
+print(loop())
 
 def get2():
-    url_frappe = 'http://www.starbucks.com/menu/drinks/frappuccino-blended-beverages/caffe-vanilla-frappuccino-light-blended-beverage'
+    url_frappe = 'http://www.starbucks.com/menu/drinks/sodas/golden-ginger-ale-fizzio-handcrafted-soda'
     f = urllib.urlopen(url_frappe)
     s = f.read()
     t_start = s.rfind('<table ')
@@ -88,26 +101,28 @@ def get2():
 
 def store2():
     main = get2()
-    main = main.split('</tr>')[1:11] # rest info is useless
-    for elem in main: # gathering info
-        if '<strong>' in elem:
-            i = main.index(elem)
-            elem = elem.replace('\r','').replace('\n','').replace('\t','')
-            main[i] = elem
-            print elem
-        else:
-            main.remove(elem)
-    return main
+    main = main.split('</tr>')[:11] # rest info is useless
     M = {}
-    for i in range(len(main)):
+    for i in range(len(main)): # gathering info
         elem = main[i]
-        t_end = elem.rfind(' ')
-        title = elem[:t_end]
-        num = elem[t_end+1:]
-        M[title] = num
- #   M['fat'] = M['Total Fat']
-#    M['carbs'] = M['Total Carbohydrate']
-#    del M['Total Fat']
-#    del M['Total Carbohydrate']
-    return M
-# 0 2 5 6 7 10
+        if '<strong>' in elem:
+            elem = elem.replace('\r','').replace('\n','').replace('\t','')
+            t_start = elem.find('<strong>') + 8 # title start
+            t_end = elem.find('</strong>') # title end
+            title = elem[t_start:t_end].lower()
+            num_end = elem.find('</td>',t_end)
+            num = elem[t_end+10:num_end]
+            if title == 'total fat':
+                title = 'fat'
+            elif title == 'total carbohydrate':
+                title = 'carbs'
+        elif 'Dietary Fiber' in elem:
+            title = 'fiber'
+            num_start = elem.find('Fiber') + 6
+            num_end = elem.find('</td>', num_start)
+            num = elem[num_start:num_end]
+        num = num.replace('g','').replace('m','')
+        if title in th: #th is the title list
+            M[title] = num
+    
+    print M

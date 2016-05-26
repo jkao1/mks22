@@ -18,7 +18,10 @@ table {display:block;margin:0 auto}
 """
 
 def sb_get(product_type,item):
-    url_nutr = 'http://www.starbucks.com/menu/catalog/nutrition?'+product_type+'=' + item + '#view_control=nutrition'
+    if product_type=='drink' and item in 'sodafrappuccino':
+        url_nutr = 'http://www.starbucks.com/menu/drinks'
+    else:
+        url_nutr = 'http://www.starbucks.com/menu/catalog/nutrition?'+product_type+'=' + item + '#view_control=nutrition'
     f = urllib.urlopen(url_nutr)
     s = f.read()
     t_start = s.rfind('<table ')
