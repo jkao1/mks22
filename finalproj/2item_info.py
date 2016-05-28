@@ -9,16 +9,14 @@ content_type = "Content-type:text/html\n"
 html_top = """
 <html>
     <head> 
-    <title></title>
+        <title></title>
+        <link href="css/custom.css" rel="stylesheet">
+        <link href="http://fonts.googleapis.com/css?family=Open+Sans|Montserrat" rel="stylesheet">
+    </head>
+    <body class="item-info">
+    <div class="header">
 """
-css = """
-    <style>
-    table {display:block;margin:0 auto}
-    </style>
-</head>
-<body>
-"""
-html_btm = "</body></html>"
+html_btm = "</div></body></html>"
 
 form = cgi.FieldStorage()
 
@@ -27,7 +25,7 @@ def sb_html():
     output = '<form method="GET" action="3result.py">'
     if product_type == 'drink':
         output += """
-        Choose a drink:
+        <p class="choose-item">Choose a drink:</p>
         <select name="item">
             <option value="refreshers">Refreshers</option>
             <option value="iced-coffee">Iced Coffee</option>
@@ -44,7 +42,7 @@ def sb_html():
         """
     elif product_type == 'food':
         output += """
-        Choose some food:
+        <p class="choose-item">Choose some food:</p>
         <select name="item">
             <option value="hot-breakfast">Hot Breakfast</option>
             <option value="bistro-boxes">Bistro Boxes</option>
@@ -54,12 +52,12 @@ def sb_html():
         </select><br>
         """
     output += """
-        Sort by the
+        <p class="choose-item choose-item-sort">Sort by the</p>
         <select name="sort">
-            <option value="high">highest</option>
-            <option value="low">lowest</option>
+            <option value="-1">highest</option>
+            <option value="1">lowest</option>
         </select>
-        amount of
+        <p class="choose-item choose-item-sort">amount of</p>
         <select name="info">
             <option value="calories">calories</option>
             <option value="fat">fat</option>
@@ -67,7 +65,7 @@ def sb_html():
             <option value="fiber">fiber</option>
             <option value="protein">protein</option>
             <option value="sodium">sodium</option>
-        </select>.<br>
+        </select><p class="choose-item choose-item-sort".</p><br>
     """
     output += '<input type="hidden" name="product_type" value="'+product_type+'">'
     output += '<input type="submit" name="Starbucks" value="Submit"></form>'
@@ -81,7 +79,6 @@ def pm_html(): #incomplete
 def Main():
     print content_type
     print html_top
-    print css
     if form.getvalue('Starbucks') == "Yes":
         sb_html()
     elif form.getvalue('Pret A Manger') == "Yes":

@@ -14,7 +14,7 @@ body {
 	display: block;
 	margin: 0 auto;
 	position: relative;
-	top: 30%;
+	top: 20%;
 	text-align: center;
 }
 
@@ -36,6 +36,11 @@ body {
 	transition-duration: .3s;
 }
 
+.header form input[value="Submit"] {
+	position: relative;
+	left: 16px;
+}
+
 .header form input[value="Yes"] {
 	display: inline-block;
 	background: #028090;
@@ -46,10 +51,15 @@ body {
 	font-family: 'Gill Sans';
 	padding: 12px 20px;
 	transition-duration: .3s;
+	position: relative;
+	left: 32px;
 }
 
-.header form select[name="product_type"] {
-	display: block;
+.header form select[name="product_type"],
+.header form select[name="item"],
+.header form select[name="sort"],
+.header form select[name="info"] {
+	display: inline-block;
 	background-color: #e4fde1;
 	font-family: 'Montserrat';
 	margin: 0 auto;
@@ -62,4 +72,24 @@ body {
 
 .header form select[name="product_type"]:focus {
 	outline: none;
+}
+
+.header form select[name="item"] {
+	display: inline-block !important;
+	position: relative;
+	left: 27px;
+	bottom: 6px;
+}
+
+.header form .choose-item {
+	display: inline-block !important;
+}
+
+.header form .choose-item-sort {
+	font-size: 40px;
+}
+
+.header form select[name="sort"],
+.header form select[name="info"] {
+	margin: 13px;
 }

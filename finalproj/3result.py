@@ -20,7 +20,6 @@ table {display:block;margin:0 auto}
 th = ['calories', 'fat', 'carbs', 'fiber', 'protein', 'sodium']
 
 unit = {
-    'calories': '',
     'fat': 'g',
     'carbs': 'g',
     'fiber': 'g',
@@ -38,7 +37,15 @@ def capitalize(s):
     for word in words:
         output += word.capitalize() + ' '
     return output[:-1]
-    
+
+def get_num(s):
+    num_end = s.rfind('</td>')
+    num_start = s.find('<td>', num_end-7)+4
+    try:
+        return int(s[num_start:num_end])
+    except:
+        return '-'
+
 ##=================================##
 ##=====REGULAR FOOD/DRINK MENU=====##
 ##=================================##
@@ -51,7 +58,7 @@ def sb_get(product_type,item):
     t_end = s.find('</table>',t_start)
     return s[t_start:t_end]
 
-def sb_store(product_type,item,info):
+def sb_store(product_type,item,info,sort):
     main = sb_get(product_type,item) 
     main = main.split('</tr>')[1:-1]
     M = {}
@@ -79,9 +86,16 @@ def sb_store(product_type,item,info):
         M[title] = dic
     
     table = "<table border=1>"
-    table += "\n\t<tr><th>Product Name</th><th>"+info.capitalize()+'('+unit[info]+")</th></tr>"
+    table += "\n\t<tr><th>Product Name</th><th>"+info.capitalize()
+    if info != 'calories':
+        table += '('+unit[info]+')'
+    table += "</th></tr>"
+    td_toSort = []
     for key in M:
-        table += '\n\t<tr>'+'<td>'+capitalize(key)+'</td>'+'<td>'+M[key][info]+'</td>'+'</tr>'
+        td_toSort.append('\n\t<tr>'+'<td>'+capitalize(key)+'</td>'+'<td>'+M[key][info]+'</td>'+'</tr>')
+    td_Sorted = sorted(td_toSort, key=lambda td: get_num(td) * int(sort))
+    for td in td_Sorted:
+        table += td
     table += "\n</table>"
     return table
 
@@ -122,51 +136,52 @@ def sb_store_frappe(item):
         num = num.replace('g','').replace('m','')
         if title in th: #th is the title list
             M[title] = num
-    
     return M
 
 form = cgi.FieldStorage()
 
-def sb_frappe_main():
+def sb_frappe_main(info,sort):
     url = 'http://www.starbucks.com/menu/drinks/frappuccino-blended-beverages'
     f = urllib.urlopen(url)
     s = f.read()
+    
     ol_start = s.find('<ol', s.find('<h3>Drinks</h3>'))
     ol_end = s.find('</ol>', ol_start)
-    #return s[ol_start:ol_end]
-    
-    ### NEXT FUNCTION ###
     ol = s[ol_start:ol_end]
     ol = ol.split('<li>')[1:]
+    
     M = {}
     for i in range(len(ol)):
         elem = ol[i]
         t_start = elem.find('frappuccino-blended-beverages')+30
         t_end = elem.find('"',t_start)
         title = elem[t_start:t_end]
+        #=========================#
+        #==FIX CHARACTER PROBLEM==#
+        #=========================#
+        
         M[title.replace('-',' ')] = sb_store_frappe(title)
-        e_start = title.find(' blended') # redundant info
-        if e_start != -1:          
-            title = title[:e_start]
     
-    info = 'calories'
     table = "<table border=1>"
-    table += "\n\t<tr><th>Product Name</th><th>"+info.upper()+"</th></tr>"
+    table += "\n\t<tr><th>Product Name</th><th>"+info.capitalize()+"</th></tr>"
+    td_toSort = []
     for key in M:
-        table += '\n\t<tr>'+'<td>'+key+'</td>'+'<td>'+M[key][info]+'</td>'+'</tr>'
+        td_toSort.append('\n\t<tr>'+'<td>'+capitalize(key)+'</td>'+'<td>'+M[key][info]+'</td>'+'</tr>')
+    td_Sorted = sorted(td_toSort, key=lambda td: get_num(td) * int(sort))
+    for td in td_Sorted:
+        table += td
     table += "\n</table>"
     return table
-
-
 
 def sb_html():
     product_type = form.getvalue('product_type')
     item = form.getvalue('item')
     info = form.getvalue('info')
+    sort = form.getvalue('sort')
     if item=='frappuccino':
-        table = sb_frappe_main()
+        table = sb_frappe_main(info,sort)
     else:
-        table = sb_store(product_type, item, info)
+        table = sb_store(product_type, item, info, sort)
     print table
 
 def Main():
