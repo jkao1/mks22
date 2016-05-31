@@ -14,7 +14,7 @@ html_top = """
         <link href="http://fonts.googleapis.com/css?family=Open+Sans|Montserrat" rel="stylesheet">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     </head>
-<body>
+<body class="result-bg">
 """
 html_btm = "</body></html>"
 
@@ -86,7 +86,7 @@ def sb_store(product_type,item,info,sort):
             dic[th[i]] = ls[i]
         M[title] = dic
     
-    table = '<table class="table table-condensed">'
+    table = '<table>'
     table += "\n\t<tr><th>Product Name</th><th>"+info.capitalize()
     if info != 'calories':
         table += '('+unit[info]+')'
@@ -163,7 +163,7 @@ def sb_frappe_main(info,sort):
         
         M[title.replace('-',' ')] = sb_store_frappe(title)
     
-    table = '<table class="table table-condensed">'
+    table = '<table>'
     table += "\n\t<tr><th>Product Name</th><th>"+info.capitalize()+"</th></tr>"
     td_toSort = []
     for key in M:

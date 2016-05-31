@@ -13,9 +13,15 @@ body {
 	height: 100%;
 	width: 100%;
 }
+
 .item-info-bg {
 	margin: 0;
 	background: #70C1B3;
+}
+
+.result-bg {
+	margin: 0;
+	background: #247BA0;
 }
 
 .header {
@@ -112,9 +118,22 @@ body {
 	margin: 13px;
 }
 
-.table {
-	width: 70%;
+table {
 	display: block;
 	margin: 0 auto;
-	border-top: 1px solid #fff !important;
+	border: 1px solid black;
+	background: #f3ffbd;
+	color: #70C1B3;
+}
+
+table tr td:first-child {
+	width: 300px;
+	padding: 10px;
+	border: 1px solid black;
+}
+
+table tr td:last-child {
+	width: 150px;
+	padding: 10px;
+	border: 1px solid black;
 }
