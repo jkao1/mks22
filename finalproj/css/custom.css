@@ -1,13 +1,21 @@
 body {
 	margin: 0;
-	overflow: hidden;
-	background: #456990;
 }
 
+.container {
+	background: linear-gradient(
+		to right,
+		#70C1B3 0%,
+		#70C1B3 50%,
+		#f3ffbd 50%,
+		#f3ffbd 100%
+	);
+	height: 100%;
+	width: 100%;
+}
 .item-info-bg {
 	margin: 0;
-	overflow: hidden;
-	background: #028090;
+	background: #70C1B3;
 }
 
 .header {
@@ -24,15 +32,25 @@ body {
 	color: #e4fde1;
 }
 
+.header form .bg-text {
+	color: #f3ffbd;
+}
+
+.header form .bg-text span {
+	color: #70C1B3;
+}
+
 .header form input[type="submit"] {
 	display: inline-block;
-	background: #f45b69;
-	border: 1px solid #f45b69;
+	background: #FF1654;
+	border: 1px solid #FF1654;
 	border-radius: 10px;
 	color: white;
 	font-size: 24px;
 	font-family: 'Montserrat';
-	padding: 20px;
+	width: 200px;
+	padding: 20px 0;
+	margin: 30px;
 	transition-duration: .3s;
 }
 
@@ -43,8 +61,8 @@ body {
 
 .header form input[value="Yes"] {
 	display: inline-block;
-	background: #028090;
-	border: 1px solid #028090;
+	background: #FF1654;
+	border: 1px solid #FF1654;
 	border-radius: 10px;
 	color: white;
 	font-size: 24px;
@@ -92,4 +110,11 @@ body {
 .header form select[name="sort"],
 .header form select[name="info"] {
 	margin: 13px;
+}
+
+.table {
+	width: 70%;
+	display: block;
+	margin: 0 auto;
+	border-top: 1px solid #fff !important;
 }
