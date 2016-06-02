@@ -34,7 +34,7 @@ def sb_html():
             <option value="chocolate">Chocolate Drinks</option>
             <option value="brewed-coffee">Brewed Coffee</option>
             <option value="bottled-drinks">Bottled Drinks</option>
-            <option value="frappuccino">Frappuccino !coming soon!</option>
+            <option value="frappuccino">Frappuccino</option>
             <option value="sodas" disabled>Sodas !coming soon!</option>
             <option value="smoothies">Smoothies</option>
             <option value="kids-drinks-and-other">Other</option>
@@ -74,9 +74,35 @@ def sb_html():
 def pm_html(): #incomplete
     product_type = form.getvalue("product_type") 
     output = '<form method="GET" action="3result.py">'
-    if product_type = "breakfast":
+    if product_type == "lunch":
+        output += """
+        <p class="choose-item">Choose a lunch item:</p><br>
+        <select name="item">
+            <option>Sandwiches</option>
+            <option>Baguettes</option>
+            <option>Hot Stuff</option>
+            <option>Wraps</option>
+            <option>Salads</option>
+        </select><br>
+        """
+    elif product_type == "soups":
+        output += """
+        <p class="choose-item">Choose a type of soup:</p><br>
+        <select name="item">
+            <option>Today's Soups</option>
+            <option>All Soups</option>
+        </select>
+        """
+
+    else:
+        ################
+        #==PRET STORE==#
+        ################
+        print "i still have to do the pret store function"
         
-    print "nothing yet"
+    output += '<input type="hidden" name="product_type" value="'+product_type+'">'
+    output += '<input type="submit" name="Pret A Manger" value="Submit"></form>'
+    print output
     
 def Main():
     print content_type

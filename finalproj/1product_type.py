@@ -31,7 +31,7 @@ def sb_html():
     """
 
 def pm_html(): #incomplete
-    print """
+    output = """
     <form method="GET" action="2item_info.py">
         Do you want ...
         <select name="product_type">
@@ -44,6 +44,7 @@ def pm_html(): #incomplete
         <input type="submit" name="Pret A Manger" value="Yes">
     </form>
     """
+    
 
 form = cgi.FieldStorage()
 
