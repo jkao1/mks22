@@ -86,7 +86,7 @@ def sb_store(product_type,item,info,sort):
             dic[th[i]] = ls[i]
         M[title] = dic
     
-    table = '<table>'
+    table = '<table border=1>'
     table += "\n\t<tr><th>Product Name</th><th>"+info.capitalize()
     if info != 'calories':
         table += '('+unit[info]+')'
@@ -163,7 +163,7 @@ def sb_frappe_main(info,sort):
         
         M[title.replace('-',' ')] = sb_store_frappe(title)
     
-    table = '<table>'
+    table = '<table border=1>'
     table += "\n\t<tr><th>Product Name</th><th>"+info.capitalize()+"</th></tr>"
     td_toSort = []
     for key in M:

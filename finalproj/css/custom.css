@@ -21,7 +21,7 @@ body {
 
 .result-bg {
 	margin: 0;
-	background: #247BA0;
+	background: #F3FFBD;
 }
 
 .header {
@@ -121,19 +121,24 @@ body {
 table {
 	display: block;
 	margin: 0 auto;
-	border: 1px solid black;
+	border: 2px solid #FF1654;
 	background: #f3ffbd;
-	color: #70C1B3;
+	color: #FF1654;
+	font-family: 'Open Sans';
+	margin-top: 20px;
+}
+
+table tr th {
+	font-size: 20px;
+	text-align: center;
 }
 
 table tr td:first-child {
-	width: 300px;
+	width: 50%;
 	padding: 10px;
-	border: 1px solid black;
 }
 
 table tr td:last-child {
-	width: 150px;
+	width: 30%;
 	padding: 10px;
-	border: 1px solid black;
 }

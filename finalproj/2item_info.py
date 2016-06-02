@@ -74,6 +74,8 @@ def sb_html():
 def pm_html(): #incomplete
     product_type = form.getvalue("product_type") 
     output = '<form method="GET" action="3result.py">'
+    if product_type = "breakfast":
+        
     print "nothing yet"
     
 def Main():
