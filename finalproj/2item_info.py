@@ -20,6 +20,29 @@ html_btm = "</div></body></html>"
 
 form = cgi.FieldStorage()
 
+##==========================##
+##=====HELPER FUNCTIONS=====##
+##==========================##
+
+def capitalize(s):
+    words = s.split(' ')
+    output = ''
+    for word in words:
+        output += word.capitalize() + ' '
+    return output[:-1]
+
+def get_num(s):
+    num_end = s.rfind('</td>')
+    num_start = s.find('<td>', num_end-7)+4
+    try:
+        return int(s[num_start:num_end])
+    except:
+        return '-'
+    
+##===================##
+##=====STARBUCKS=====##
+##===================##
+
 def sb_html():
     product_type = form.getvalue("product_type") 
     output = '<form method="GET" action="3result.py">'
@@ -71,16 +94,34 @@ def sb_html():
     output += '<input type="submit" name="Starbucks" value="Submit"></form>'
     print output
 
+##=======================##
+##=====PRET A MANGER=====##
+##=======================##
+
+def pm_get(product_type):
+    url = "https://www.pret.com/en-us/our-menu/"+product_type+".aspx"
+    f = urllib.urlopen(url)
+    s = f.read()
+    t_start = s.rfind('<!-- filter results -->')
+    t_end = s.find('</section>',t_start)
+    return s[t_start:t_end]
+
+def pm_store(product_type):
+    main = pm_get(product_type)
+    main = main.split('<div class="textwrap">')
+    return main
+   
 def pm_html(): #incomplete
     product_type = form.getvalue("product_type") 
     output = '<form method="GET" action="3result.py">'
+    #for hot food, don't forget '685-pret's-hot-spinach-tomato-mac-%26-cheese' 
     if product_type == "lunch":
         output += """
         <p class="choose-item">Choose a lunch item:</p><br>
         <select name="item">
             <option>Sandwiches</option>
             <option>Baguettes</option>
-            <option>Hot Stuff</option>
+            <option>Hot Food</option>
             <option>Wraps</option>
             <option>Salads</option>
         </select><br>
@@ -93,12 +134,27 @@ def pm_html(): #incomplete
             <option>All Soups</option>
         </select>
         """
-
+    elif product_type == "snacks":
+        output += """
+        <p class="choose-item">Choose a type of snack:</p><br>
+        <select name="item">
+            <option value="129-pret-pots">Pret's Pots</option>
+            <option value="74-treats-&-snacks">Treats</option>
+            <option value="76-bakery">Bakery</option>
+            <option value="77-fresh-fruit">Fresh Fruit</option>
+        </select>
+        """
+    elif product_type == "drinks":
+        output += """
+        <p class="choose-item">Choose a type of snack:</p><br>
+        <select name="item">
+            <option value="124-organic-coffee">Organic Coffee</option>
+            <option value="78-cold-drinks">Cold Drinks</option>
+        </select>
+        """
     else:
-        ################
-        #==PRET STORE==#
-        ################
-        print "i still have to do the pret store function"
+        output = pm_store(product_type)
+        print "i still have to complete the pret store function"
         
     output += '<input type="hidden" name="product_type" value="'+product_type+'">'
     output += '<input type="submit" name="Pret A Manger" value="Submit"></form>'

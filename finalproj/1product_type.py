@@ -35,7 +35,7 @@ def pm_html(): #incomplete
     <form method="GET" action="2item_info.py">
         Do you want ...
         <select name="product_type">
-            <option value="breakfast">Breakfast</option>
+            <option value="87-breakfast">Breakfast</option>
             <option value="lunch">Lunch</option>
             <option value="soups">Soups</option>
             <option value="drinks">Drinks</option>
