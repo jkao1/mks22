@@ -99,12 +99,12 @@ def sb_html():
 ##=======================##
 
 def pm_get(product_type):
-    url = "https://www.pret.com/en-us/our-menu/"+product_type+".aspx"
+    url = "www.pret.com/en-us/our-menu/"+product_type+".aspx"
     f = urllib.urlopen(url)
     s = f.read()
     t_start = s.rfind('<!-- filter results -->')
     t_end = s.find('</section>',t_start)
-    return s[t_start:t_end]
+    return s#[t_start:t_end]
 
 def pm_store(product_type):
     main = pm_get(product_type)
