@@ -110,10 +110,75 @@ def sb_html():
     output += '<input type="submit" name="Starbucks" value="Submit"></form>'
     return output
 
+def jm_html():
+    product_type = form.getvalue("product_type") 
+    output = '<form method="GET" action="3result.py">'
+    #listed: juices, energybowls,juiceshots,jambago,kids,makeitlight
+    #unlisted: smoothies,tastyy-bites, boosts
+    if product_type == 'smoothies':
+        output += """
+        <p class="choose-item">Choose a type of smoothie:</p>
+        <select name="item">
+            <option value="all-smoothies">All smoothies</option>
+            <option value="classic-smoothies">Classic</option>
+            <option value="island-getaway-smoothies">Island Getaway</option>
+            <option value="whole-food-nutrition">Whole Food Nutrition</option>
+            <option value="all-fruit-smoothies">All-Fruit</option>
+            <option value="fit-n-fruitful">Fit 'N Fruitful</option>
+            <option value="fruit-veggie">Fruit & Veggie</option>
+            <option value="functional-smoothies">Functional</option>
+            <option value="creamy-treats">Creamy Treats</option>
+        </select><br>
+        """
+    elif product_type == 'tasty-bites':
+        output += """
+        <p class="choose-item">Choose a tasty bite:</p>
+        <select name="item">
+            <option value="all-tasty-bites">All tasty bites</option>
+            <option value="oatmeal">Oatmeal</option>
+            <option value="artisan-flatbreads">Artisan Flatbreads</option>
+            <option value="baked-goods">Baked Goods</option>
+            <option value="breakfast-wraps">Breakfast Wraps</option>
+            <option value="toasted-bistro-sandwiches">Toasted Bistro Sandwiches</option>
+        </select><br>
+        """
+    elif product_type == 'boosts':
+        output += """
+        <p class="choose-item">Choose a tasty bite:</p>
+        <select name="item">
+            <option value="whole-food-boosts">Whole Food Boosts</option>
+            <option value="boosts">Boosts</option>
+        </select><br>
+        """
+    else:
+        #####SOME BACKEND STUFF
+    output += """
+        <p class="choose-item choose-item-sort">Sort by the</p>
+        <select name="sort">
+            <option value="-1">highest</option>
+            <option value="1">lowest</option>
+        </select>
+        <p class="choose-item choose-item-sort">amount of</p>
+        <select name="info">
+            <option value="calories">calories</option>
+            <option value="fat">fat</option>
+            <option value="carbs">carbs</option>
+            <option value="fiber">fiber</option>
+            <option value="protein">protein</option>
+            <option value="sodium">sodium</option>
+        </select><p class="choose-item choose-item-sort".</p><br>
+    """
+    output += '<input type="hidden" name="product_type" value="'+product_type+'">'
+    output += '<input type="submit" name="Jamba Juice" value="Submit"></form>'
+    return output
+    
 def Main():
     print content_type
     print html_top()
-    print sb_html()
+    if form.getvalue('Starbucks') == "Yes":
+        sb_html()
+    elif form.getvalue('Jamba Juice') == "Yes":
+        jm_html()
     print html_btm
 
 Main() 
