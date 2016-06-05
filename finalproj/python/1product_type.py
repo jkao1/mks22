@@ -15,6 +15,12 @@ html_top = """
     </head>
     <body class="item-info-bg">
     <div class="header">
+        <script>
+            document.getElementById("toIndex").onclick = function () {
+                location.href = "www.yoursite.com";
+            };
+        </script>
+        <button id="toIndex">Back</button>
 """
 html_btm = "</div></body></html>"
 

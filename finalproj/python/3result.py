@@ -97,6 +97,7 @@ def sb_store(product_type,item,info,sort):
             title = cont[cont.find('/',42)+1:cont.find('"',42)]
         title = title.replace('-',' ')
         title = title.replace('?foodZone=9999','')
+        title = title.replace('tm','&trade;')
         if 'Starbucks ' == title[:10]:
             title = title.replace('Starbucks ','')
         else:
