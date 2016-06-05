@@ -119,7 +119,7 @@ body {
 }
 
 table {
-	display: block;
+	/* display: block; */
 	margin: 0 auto;
 	border: 2px solid #FF1654;
 	background: #f3ffbd;

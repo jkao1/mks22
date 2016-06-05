@@ -9,7 +9,7 @@ content_type = "Content-type:text/html\n"
 html_top = """
 <html>
     <head> 
-        <title>Title</title>
+        <title>Pick & Choose</title>
         <link href="../css/custom.css" rel="stylesheet">
         <link href="http://fonts.googleapis.com/css?family=Open+Sans|Montserrat" rel="stylesheet">
     </head>
@@ -39,3 +39,11 @@ def Main():
     print html_btm
 
 Main() 
+
+
+
+
+
+
+
+
