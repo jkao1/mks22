@@ -1,6 +1,5 @@
 #final proj
 
-###Ideas
 ###To-dos
 - add units of measurement
 - food
@@ -17,3 +16,7 @@
     <input type="hidden" name=id value="account">
 </form>
 ```
+###Submission
+- mention that all info except titles ('frappuccino-blended-beverages') and nutrient categories ('calories','carbs') is taken from the Starbucks site. 
+This includes formal titles,
+- symbol for 'Crème' will not work. This is because python won't allow me to manipulate the actual string that contains it becuase there are 'Unspported characters in input'.
