@@ -6,21 +6,13 @@ cgitb.enable()
 
 content_type = "Content-type:text/html\n"
 
-html_top = """
-<html>
-    <head>
-        <title>Title</title>
-        <link href="css/custom.css" rel="stylesheet">
-        <link href="http://fonts.googleapis.com/css?family=Open+Sans|Montserrat" rel="stylesheet">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-    </head>
-<body class="result-bg">
-"""
 html_btm = "</body></html>"
 
-th = ['calories', 'fat', 'carbs', 'fiber', 'protein', 'sodium']
+form = cgi.FieldStorage()
 
-unit = {
+th = ['calories', 'fat', 'carbs', 'fiber', 'protein', 'sodium'] 
+
+units = {
     'fat': 'g',
     'carbs': 'g',
     'fiber': 'g',
@@ -37,6 +29,8 @@ def capitalize(s):
     output = ''
     for word in words:
         output += word.capitalize() + ' '
+    if 'S Mores' in output:
+        output = output.replace('S M',"S'm")
     return output[:-1]
 
 def get_num(s):
@@ -46,18 +40,39 @@ def get_num(s):
         return int(s[num_start:num_end])
     except:
         return '-'
+        
+def html_top():
+    item = capitalize(form.getvalue('item').replace('-',' '))
+    if item[-1] != 's':
+        item += 's'
+    info = form.getvalue('info')
+    output = """
+    <html>
+        <head>
+            <title>mark</title>
+            <link href="../css/custom.css" rel="stylesheet">
+            <link href="http://fonts.googleapis.com/css?family=Open+Sans|Montserrat" rel="stylesheet">
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+        </head>
+        <body class="result-bg">
+    """
+    if item == 'Frappuccino':
+        output = output.replace('mark','Frappuccinos by '+capitalize(info))
+    else:
+        output = output.replace('mark',item+' by '+capitalize(info))
+    return output
 
 ##=================================##
 ##=====REGULAR FOOD/DRINK MENU=====##
 ##=================================##
 
 def sb_get(product_type,item):
-    url_nutr = 'http://www.starbucks.com/menu/catalog/nutrition?'+product_type+'=' + item + '#view_control=nutrition'
+    url_nutr = 'http://www.starbucks.com/menu/catalog/nutrition?'+product_type+'='+item+'#view_control=nutrition'
     f = urllib.urlopen(url_nutr)
     s = f.read()
     t_start = s.rfind('<table ')
     t_end = s.find('</table>',t_start)
-    return s[t_start:t_end]
+    return s[t_start:t_end] # table's html
 
 def sb_store(product_type,item,info,sort):
     main = sb_get(product_type,item) 
@@ -89,7 +104,7 @@ def sb_store(product_type,item,info,sort):
     table = '<table border=1>'
     table += "\n\t<tr><th>Product Name</th><th>"+info.capitalize()
     if info != 'calories':
-        table += '('+unit[info]+')'
+        table += '('+units[info]+')'
     table += "</th></tr>"
     td_toSort = []
     for key in M:
@@ -100,21 +115,21 @@ def sb_store(product_type,item,info,sort):
     table += "\n</table>"
     return table
 
-##==========================##
-##=====FRAPPUCCINO MENU=====##
-##==========================##
+##=======================================##
+##=====SPECIFIC MENU (sodas,frappes)=====##
+##=======================================##
 
-def sb_get_frappe(item):
-    url_frappe = 'http://www.starbucks.com/menu/drinks/frappuccino-blended-beverages/'+item
-    f = urllib.urlopen(url_frappe)
+def sb_get_spec(product,item):
+    url_product = 'http://www.starbucks.com/menu/drinks/'+product+'/'+item
+    f = urllib.urlopen(url_product)
     s = f.read()
     t_start = s.rfind('<table ')
     t_end = s.find('</table>',t_start)
     return s[t_start:t_end]
 
-def sb_store_frappe(item):
-    main = sb_get_frappe(item)
-    main = main.split('</tr>')[:11] # rest info is useless
+def sb_store_spec(product,item):
+    main = sb_get_spec(product,item)
+    main = main.split('</tr>')[:11]
     M = {}
     for i in range(len(main)): # gathering info
         elem = main[i]
@@ -134,19 +149,22 @@ def sb_store_frappe(item):
             num_start = elem.find('Fiber') + 6
             num_end = elem.find('</td>', num_start)
             num = elem[num_start:num_end]
+        else:
+            continue
         num = num.replace('g','').replace('m','')
         if title in th: #th is the title list
             M[title] = num
     return M
 
-form = cgi.FieldStorage()
-
-def sb_frappe_main(info,sort):
-    url = 'http://www.starbucks.com/menu/drinks/frappuccino-blended-beverages'
+def sb_spec_main(product,info,sort):
+    url = 'http://www.starbucks.com/menu/drinks/'+product
     f = urllib.urlopen(url)
     s = f.read()
-    
-    ol_start = s.find('<ol', s.find('<h3>Drinks</h3>'))
+
+    if 'frappuccino' in product:
+        ol_start = s.find('<ol', s.find('<h3>Drinks</h3>'))
+    elif 'sodas' == product:
+        ol_start = s.find('<ol', s.find('<p>At participating stores.</p>'))
     ol_end = s.find('</ol>', ol_start)
     ol = s[ol_start:ol_end]
     ol = ol.split('<li>')[1:]
@@ -154,15 +172,10 @@ def sb_frappe_main(info,sort):
     M = {}
     for i in range(len(ol)):
         elem = ol[i]
-        t_start = elem.find('frappuccino-blended-beverages')+30
+        t_start = elem.find(product)+len(product)+1
         t_end = elem.find('"',t_start)
         title = elem[t_start:t_end]
-        #=========================#
-        #==FIX CHARACTER PROBLEM==#
-        #=========================#
-        
-        M[title.replace('-',' ')] = sb_store_frappe(title)
-    
+        M[title.replace('-',' ').replace('blended beverage','').replace('\xc3\xa8','&#232;')] = sb_store_spec(product,title)
     table = '<table border=1>'
     table += "\n\t<tr><th>Product Name</th><th>"+info.capitalize()+"</th></tr>"
     td_toSort = []
@@ -179,17 +192,16 @@ def sb_html():
     item = form.getvalue('item')
     info = form.getvalue('info')
     sort = form.getvalue('sort')
-    if item=='frappuccino':
-        table = sb_frappe_main(info,sort)
+    if item == "frappuccino-blended-beverages" or item == "sodas":
+        table = sb_spec_main(item,info,sort) # param product is item
     else:
         table = sb_store(product_type, item, info, sort)
-    print table
+    return table
 
 def Main():
     print content_type
-    print html_top
-    if form.getvalue('Starbucks') == 'Submit':
-        sb_html()
+    print html_top()
+    print sb_html()
     print html_btm
 
 Main() 

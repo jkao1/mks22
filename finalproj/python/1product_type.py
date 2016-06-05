@@ -10,7 +10,7 @@ html_top = """
 <html>
     <head> 
         <title>Title</title>
-        <link href="css/custom.css" rel="stylesheet">
+        <link href="../css/custom.css" rel="stylesheet">
         <link href="http://fonts.googleapis.com/css?family=Open+Sans|Montserrat" rel="stylesheet">
     </head>
     <body class="item-info-bg">
@@ -19,7 +19,7 @@ html_top = """
 html_btm = "</div></body></html>"
 
 def sb_html():
-    print """
+    return """
     <form method="GET" action="2item_info.py">
         <p>Do you want ...</p><br>
         <select name="product_type">
@@ -30,31 +30,12 @@ def sb_html():
     </form>
     """
 
-def pm_html(): #incomplete
-    output = """
-    <form method="GET" action="2item_info.py">
-        Do you want ...
-        <select name="product_type">
-            <option value="87-breakfast">Breakfast</option>
-            <option value="lunch">Lunch</option>
-            <option value="soups">Soups</option>
-            <option value="drinks">Drinks</option>
-            <option value="snacks">Snacks</option>
-        </select><br>
-        <input type="submit" name="Pret A Manger" value="Yes">
-    </form>
-    """
-    
-
 form = cgi.FieldStorage()
 
 def Main():
     print content_type
     print html_top
-    if form.getvalue('store') == 'Starbucks':
-        sb_html()
-    elif form.getvalue('store') == 'Pret A Manger':
-        pm_html()
+    print sb_html()
     print html_btm
 
 Main() 
