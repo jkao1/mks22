@@ -50,7 +50,10 @@ def html_top():
             <link href="http://fonts.googleapis.com/css?family=Open+Sans|Montserrat" rel="stylesheet">
         </head>
         <body class="item-info-bg">
-        <div class="header">
+            <div class="header">
+                <form action="0index.py">
+                    <input type="submit" name="back" value="Back">
+                </form>
     """
     output = output.replace('mark','Choose a '+capitalize(product_type))
     return output

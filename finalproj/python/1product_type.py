@@ -12,27 +12,24 @@ html_top = """
         <title>Pick & Choose</title>
         <link href="../css/custom.css" rel="stylesheet">
         <link href="http://fonts.googleapis.com/css?family=Open+Sans|Montserrat" rel="stylesheet">
+        <link rel="stylesheet" href="../css/font-awesome-4.5.0/css/font-awesome.min.css">
     </head>
     <body class="item-info-bg">
     <div class="header">
-        <script>
-            document.getElementById("toIndex").onclick = function () {
-                location.href = "www.yoursite.com";
-            };
-        </script>
-        <button id="toIndex">Back</button>
+        <form action="0index.py">
+            <input type="submit" name="back" value="Back">
+        </form>
 """
 html_btm = "</div></body></html>"
 
 def sb_html():
     return """
     <form method="GET" action="2item_info.py">
-        <p>Do you want ...</p><br>
+        <p>Do you want ...</p>
         <select name="product_type">
             <option value="drink">a drink?</option>
             <option value="food">some food?</option>
         </select>
-        <br>
         <input type="submit" name="Starbucks" value="Yes">
     </form>
     """
@@ -40,7 +37,7 @@ def sb_html():
 def jm_html():
     return """
     <form method="GET" action="2item_info.py">
-        <p>Do you want ...</p><br>
+        <p>Do you want ...</p>
         <select name="product_type">
             <option value="juices">fresh juice?</option>
             <option value="energy-bowls">a nutritious energy bowl?</option>

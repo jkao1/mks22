@@ -32,6 +32,23 @@ body {
 	text-align: center;
 }
 
+.header input[name="back"] {
+	display: block !important;
+	width: auto !important;
+	float: left;
+	background: #FF1654;
+	border: 1px solid #FF1654;
+	border-radius: 10px;
+	color: white;
+	font-size: 24px;
+	font-family: 'Gill Sans';
+	padding: 12px 20px !important;
+	transition-duration: .3s;
+	position: relative;
+	left: 32px !important;
+	bottom: 150px !important;
+}
+
 .header form p {
 	font-family: 'Open Sans';
 	font-size: 50;
