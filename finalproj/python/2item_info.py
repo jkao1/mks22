@@ -119,7 +119,7 @@ def jm_html():
         output += """
         <p class="choose-item">Choose a type of smoothie:</p>
         <select name="item">
-            <option value="all-smoothies">All smoothies</option>
+            <option value="all">All smoothies</option>
             <option value="classic-smoothies">Classic</option>
             <option value="island-getaway-smoothies">Island Getaway</option>
             <option value="whole-food-nutrition">Whole Food Nutrition</option>
@@ -134,7 +134,7 @@ def jm_html():
         output += """
         <p class="choose-item">Choose a tasty bite:</p>
         <select name="item">
-            <option value="all-tasty-bites">All tasty bites</option>
+            <option value="all">All tasty bites</option>
             <option value="oatmeal">Oatmeal</option>
             <option value="artisan-flatbreads">Artisan Flatbreads</option>
             <option value="baked-goods">Baked Goods</option>
@@ -144,14 +144,15 @@ def jm_html():
         """
     elif product_type == 'boosts':
         output += """
-        <p class="choose-item">Choose a tasty bite:</p>
+        <p class="choose-item">Choose a boost:</p>
         <select name="item">
+            <option value="all">All boosts</option>
             <option value="whole-food-boosts">Whole Food Boosts</option>
             <option value="boosts">Boosts</option>
         </select><br>
         """
     else:
-        #####SOME BACKEND STUFF
+        output += '<input type="hidden" name="item" value="listed">'
     output += """
         <p class="choose-item choose-item-sort">Sort by the</p>
         <select name="sort">
@@ -176,9 +177,9 @@ def Main():
     print content_type
     print html_top()
     if form.getvalue('Starbucks') == "Yes":
-        sb_html()
+        print sb_html()
     elif form.getvalue('Jamba Juice') == "Yes":
-        jm_html()
+        print jm_html()
     print html_btm
 
 Main() 

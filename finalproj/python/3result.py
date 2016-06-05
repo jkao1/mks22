@@ -13,11 +13,12 @@ form = cgi.FieldStorage()
 th = ['calories', 'fat', 'carbs', 'fiber', 'protein', 'sodium'] 
 
 units = {
-    'fat': 'g',
-    'carbs': 'g',
-    'fiber': 'g',
-    'protein': 'g',
-    'sodium': 'mg',
+    'calories': '',
+    'fat': ' (g)',
+    'carbs': ' (g)',
+    'fiber': ' (g)',
+    'protein': ' (g)',
+    'sodium': ' (mg)',
 }
 
 ##==========================##
@@ -33,9 +34,17 @@ def capitalize(s):
         output = output.replace('S M',"S'm")
     return output[:-1]
 
-def get_num(s):
+def sb_get_num(s):
     num_end = s.rfind('</td>')
     num_start = s.find('<td>', num_end-7)+4
+    try:
+        return int(s[num_start:num_end])
+    except:
+        return '-'
+
+def jm_get_num(s):
+    num_start = s.rfind('<td>')+4
+    num_end = s.rfind('</td>')
     try:
         return int(s[num_start:num_end])
     except:
@@ -62,9 +71,9 @@ def html_top():
         output = output.replace('mark',item+' by '+capitalize(info))
     return output
 
-##=================================##
-##=====REGULAR FOOD/DRINK MENU=====##
-##=================================##
+##=====================##
+##=====SB REG MENU=====##
+##=====================##
 
 def sb_get(product_type,item):
     url_nutr = 'http://www.starbucks.com/menu/catalog/nutrition?'+product_type+'='+item+'#view_control=nutrition'
@@ -102,22 +111,20 @@ def sb_store(product_type,item,info,sort):
         M[title] = dic
     
     table = '<table border=1>'
-    table += "\n\t<tr><th>Product Name</th><th>"+info.capitalize()
-    if info != 'calories':
-        table += '('+units[info]+')'
+    table += "\n\t<tr><th>Product Name</th><th>"+info.capitalize()+units[info]+"</th></tr>"
     table += "</th></tr>"
     td_toSort = []
     for key in M:
         td_toSort.append('\n\t<tr>'+'<td>'+capitalize(key)+'</td>'+'<td>'+M[key][info]+'</td>'+'</tr>')
-    td_Sorted = sorted(td_toSort, key=lambda td: get_num(td) * int(sort))
+    td_Sorted = sorted(td_toSort, key=lambda td: sb_get_num(td) * int(sort))
     for td in td_Sorted:
         table += td
     table += "\n</table>"
     return table
 
-##=======================================##
-##=====SPECIFIC MENU (sodas,frappes)=====##
-##=======================================##
+##======================================##
+##=====SB SPEC MENU (sodas,frappes)=====##
+##======================================##
 
 def sb_get_spec(product,item):
     url_product = 'http://www.starbucks.com/menu/drinks/'+product+'/'+item
@@ -177,11 +184,11 @@ def sb_spec_main(product,info,sort):
         title = elem[t_start:t_end]
         M[title.replace('-',' ').replace('blended beverage','').replace('\xc3\xa8','&#232;')] = sb_store_spec(product,title)
     table = '<table border=1>'
-    table += "\n\t<tr><th>Product Name</th><th>"+info.capitalize()+"</th></tr>"
+    table += "\n\t<tr><th>Product Name</th><th>"+info.capitalize()+units[info]+"</th></tr>"
     td_toSort = []
     for key in M:
         td_toSort.append('\n\t<tr>'+'<td>'+capitalize(key)+'</td>'+'<td>'+M[key][info]+'</td>'+'</tr>')
-    td_Sorted = sorted(td_toSort, key=lambda td: get_num(td) * int(sort))
+    td_Sorted = sorted(td_toSort, key=lambda td: sb_get_num(td) * int(sort))
     for td in td_Sorted:
         table += td
     table += "\n</table>"
@@ -198,10 +205,115 @@ def sb_html():
         table = sb_store(product_type, item, info, sort)
     return table
 
+##========================##
+##=====JAMBA REG MENU=====##
+##========================##
+
+def jm_store(product_type,info,sort,opt):
+    url = 'http://www.jambajuice.com/menu-and-nutrition/menu/'+product_type
+    f = urllib.urlopen(url)
+    s = f.read()
+
+    l_start = s.find('<div class="mainbody menu menu_listing">')
+    l_end = s.find('<section id="Footer1_',l_start)
+    listing = s[l_start:l_end]
+    listing = listing.split('<div class="prod_block')[1:]
+
+    M={}
+    
+    for food in listing:
+
+        fn_end = food.find('</h2>')
+        fn_start = food.find('<h2>')
+        food_name = food[fn_start:fn_end].split('\r\n')
+        food_name = food_name[1].strip(' ')
+        
+        t_start = food.find('<td class="left_col">') # first nutritional table data
+        t_end = food.find('</table>',t_start)
+        table = food[t_start:t_end]
+    
+        table_rows = table.split('<td class="left_col">')
+        table_rows = table_rows[1:3]+table_rows[6:9]+[table_rows[-1]]
+        M_sub = {}
+        for row in table_rows:
+            if 'Calories' in row:
+                nutr_fact = 'calories'
+                nutr_num = row.split('\r\n')[1].strip(' ')
+                M_sub[nutr_fact] = nutr_num
+                continue
+            row = row.split(' ')
+            if row[1].isalpha(): # checking for two lettered nutr_facts
+                del row[0]
+            if 'Carb' in row[0]:
+                row[0] = 'carbs'
+            nutr_fact = row[0].lower()
+            nutr_num = row[1][:-2].replace('g','').replace('m','') # removes the '\r\n' (counted as 2 characters)
+            M_sub[nutr_fact] = nutr_num
+        M[food_name] = M_sub
+
+    table = '<table border=1>'
+    table += "\n\t<tr><th>Product Name</th><th>"+info.capitalize()+units[info]+"</th></tr>"
+    td_toSort = []
+    for key in M:
+        td_toSort.append('\n\t<tr>'+'<td>'+key+'</td>'+'<td>'+M[key][info]+'</td>'+'</tr>')
+    if opt:
+        return td_toSort
+    td_Sorted = sorted(td_toSort, key=lambda td: jm_get_num(td) * int(sort))
+    for td in td_Sorted:
+        table += td
+    table += "\n</table>"
+    return table
+
+def jm_store_spec(product_type,item,info,sort):
+    if item == 'all':
+        url = 'http://www.jambajuice.com/menu-and-nutrition/menu/'+product_type
+        f = urllib.urlopen(url)
+        s = f.read()
+
+        c_start = s.find('<div class="mainbody menu menu_category">')
+        c_end = s.find('<section id="Footer1_',c_start)
+        categories = s[c_start:c_end]
+        categories = categories.split('<div class="prod_block')[1:]
+
+        td_toSort = []
+        
+        for category in categories:
+            start = category.find('<a id=')
+            stop = category.find('<img id=')
+            category = category[start:stop]
+            l_start = category.find('/menu/')+7+len(product_type)
+            l_end = category.find('">',l_start)
+            listing = category[l_start:l_end]
+            td_toSort += jm_store(product_type+'/'+listing,info,sort,True)
+
+        table = '<table border=1>'
+        table += "\n\t<tr><th>Product Name</th><th>"+info.capitalize()+units[info]+"</th></tr>"
+        td_Sorted = sorted(td_toSort, key=lambda td: jm_get_num(td) * int(sort))
+        for td in td_Sorted:
+            table += td
+        table += "\n</table>"
+        return table
+    else:
+        return jm_store(product_type+'/'+item,info,sort,False)
+    
+def jm_html():
+    product_type = form.getvalue('product_type')
+    item = form.getvalue('item')
+    info = form.getvalue('info')
+    sort = form.getvalue('sort')
+    if item == "listed": # no further directories to enter
+        table = jm_store(product_type,info,sort,False)
+    else:
+        table = jm_store_spec(product_type,item,info,sort)
+    return table
+
 def Main():
     print content_type
     print html_top()
-    print sb_html()
+    if form.getvalue("Starbucks") == "Submit":
+        print sb_html()
+    elif form.getvalue("Jamba Juice") == "Submit":
+        print jm_html()
     print html_btm
 
 Main() 

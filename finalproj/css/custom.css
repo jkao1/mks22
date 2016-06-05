@@ -141,4 +141,5 @@ table tr td:first-child {
 table tr td:last-child {
 	width: 30%;
 	padding: 10px;
+	text-align: center;
 }

@@ -46,7 +46,6 @@ def jm_html():
             <option value="make-it-light">something light?</option>
             <option value="boosts">caffeine-free energy?</option>
         </select>
-        <br>
         <input type="submit" name="Jamba Juice" value="Yes">
     </form>
     """
@@ -57,9 +56,9 @@ def Main():
     print content_type
     print html_top
     if form.getvalue('store') == 'Starbucks':
-        sb_html()
+        print sb_html()
     elif form.getvalue('store') == 'Jamba Juice':
-        jm_html()
+        print jm_html()
     print html_btm
 
 Main() 
