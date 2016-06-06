@@ -16,9 +16,6 @@ html_top = """
     </head>
     <body class="item-info-bg">
     <div class="header">
-        <form action="0index.py">
-            <input type="submit" name="back" value="Back">
-        </form>
 """
 html_btm = "</div></body></html>"
 
