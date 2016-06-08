@@ -6,7 +6,10 @@ cgitb.enable()
 
 content_type = "Content-type:text/html\n"
 
-html_btm = "</body></html>"
+html_btm = """
+<a href="../index.html" style="display:block;border:1px solid #ffs63;border-radius 10px;text-decoration:underline;font-size:24px;font-family:Gill Sans;margin:0 auto;text-align:center;padding:12px 20px;">Home</a>
+</body></html>
+"""
 
 form = cgi.FieldStorage()
 
@@ -97,7 +100,8 @@ def sb_store(product_type,item,info,sort):
             title = cont[cont.find('/',42)+1:cont.find('"',42)]
         title = title.replace('-',' ')
         title = title.replace('?foodZone=9999','')
-        title = title.replace('tm','&trade;')
+        if not 'oatmeal' in title:
+            title = title.replace('tm','&trade;')
         if 'Starbucks ' == title[:10]:
             title = title.replace('Starbucks ','')
         else:
