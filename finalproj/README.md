@@ -14,3 +14,6 @@
 ###Submission
 - mention that all info except titles ('frappuccino-blended-beverages') and nutrient categories ('calories','carbs') is taken from the Starbucks site. 
 This includes formal titles,
+
+###Demo notes
+- urllib instead  of a csv file
