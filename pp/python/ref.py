@@ -16,7 +16,7 @@ top = """
         <p>
 """
 bottom = '</body></html>'
-
+"""
 form = cgi.FieldStorage()
 
 spaces=4
@@ -57,15 +57,15 @@ def html(txt):
 
 def js(txt):
     res = jsbeautifier.beautify(txt)
-    return res
+    return res"""
 
 def Main():
     print content_type
     print top
-    print js("""var x = 5 + 6 ;var y = x * 10;document.getElementById("demo").innerHTML = y;""")
+    #print js("""var x = 5 + 6 ;var y = x * 10;document.getElementById("demo").innerHTML = y;""")
     print bottom
 
-
+Main()
 
 
 
