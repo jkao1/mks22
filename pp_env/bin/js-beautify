@@ -1,7 +1,0 @@
-#!/home/students/2018/jason.kao/public_html/Github/mks22/pp_env/bin/python
-#
-# Stub script to run jsbeautifier
-#
-import sys
-from jsbeautifier import main
-sys.exit(main())
