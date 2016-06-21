@@ -1,1 +1,1 @@
-{}
+{'jkao': {'pword': 'asdfasdf', 'level': 12}, 'mrbrooks': {'pword': 'micromind', 'level': 0}}

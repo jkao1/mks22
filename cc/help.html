@@ -22,8 +22,14 @@
             #hi center {
                 font-size: 80px;
             }
-            #hi center p {
-                font-size: 20px;
+            input[type="text"] {
+                display: block;
+                font-family: 'Source Code Pro';
+                font-size: 14px;
+                padding: 5px;
+            }
+            input[type=submit] {
+                font-family: 'Source Code Pro';
             }
         </style>
     </head>
@@ -31,14 +37,16 @@
     <body>
         <br><br>
         <div id="hi">
-            <center>&lt;CodeCow/&gt;</center>
-            <center><p>by Jason Kao (ha)</p></center>
+            <center>&lt;Forum/&gt;</center>
         </div><br>
         <div style="display:block;height:1px;background:#333;"></div><br>
-        <a href="register.html">>&nbsp;&nbsp;Register.</a><br>
-        <a href="login.html">>&nbsp;&nbsp;Login.</a><br>
-        <a href="more.html">>&nbsp;&nbsp;How to get more levels.</a><br>
-        <a href="credits.html">>&nbsp;&nbsp;Credits.</a><br>
+        
+        <center>
+        <form method="GET" action="python/forum.py">
+            Enter Username to Confirm: <input type="text" name="uname" size="30"><br>
+            <input type="submit" name="submit" value="Forum">
+        </form></center>
+        <a href="index.html">>&nbsp;&nbsp;Return home.</a><br>
     </body>
 
 </html>
